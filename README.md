@@ -1,9 +1,7 @@
 giteagle
 ========
 
-Giteagle -- Bird view of repositories.
-
-Tool to merge commit flow from multiple git repositories.
+Giteagle -- Get a bird view of your repositories.
 
 You project consists of multiple repos, contributed to by multiple teams across the repos. 
 
