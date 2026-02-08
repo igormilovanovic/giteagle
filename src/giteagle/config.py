@@ -1,11 +1,13 @@
 """Configuration management for Giteagle."""
 
 import os
+import stat
 from pathlib import Path
 from typing import Any, Optional
+from urllib.parse import urlparse
 
 import yaml
-from pydantic import BaseModel, ConfigDict, Field, SecretStr
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
 
 
 class PlatformConfig(BaseModel):
@@ -13,6 +15,19 @@ class PlatformConfig(BaseModel):
 
     token: Optional[SecretStr] = Field(default=None, description="API token")
     base_url: Optional[str] = Field(default=None, description="Base API URL (for enterprise)")
+
+    @field_validator("base_url")
+    @classmethod
+    def validate_base_url(cls, v: Optional[str]) -> Optional[str]:
+        """Ensure base_url uses HTTPS to prevent credential leakage."""
+        if v is None:
+            return v
+        parsed = urlparse(v)
+        if parsed.scheme and parsed.scheme != "https":
+            raise ValueError(f"base_url must use HTTPS, got: {parsed.scheme}")
+        if not parsed.hostname:
+            raise ValueError("base_url must include a valid hostname")
+        return v
 
 
 class GiteagleConfig(BaseModel):
@@ -93,3 +108,6 @@ def save_config(config: GiteagleConfig, path: Optional[Path] = None) -> None:
 
     with open(config_path, "w") as f:
         yaml.dump(data, f, default_flow_style=False)
+
+    # Restrict file permissions to owner-only (0o600) since it contains tokens
+    config_path.chmod(stat.S_IRUSR | stat.S_IWUSR)

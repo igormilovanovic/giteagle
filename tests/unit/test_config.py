@@ -3,6 +3,7 @@
 import os
 from unittest import mock
 
+import pytest
 import yaml
 
 from giteagle.config import (
@@ -30,6 +31,26 @@ class TestPlatformConfig:
 
         assert config.token is not None
         assert config.token.get_secret_value() == "test-token"
+
+    def test_base_url_rejects_http(self):
+        """Test that base_url rejects non-HTTPS schemes."""
+        with pytest.raises(ValueError, match="must use HTTPS"):
+            PlatformConfig(base_url="http://evil.example.com")
+
+    def test_base_url_accepts_https(self):
+        """Test that base_url accepts HTTPS URLs."""
+        config = PlatformConfig(base_url="https://github.example.com/api/v3")
+        assert config.base_url == "https://github.example.com/api/v3"
+
+    def test_base_url_rejects_no_hostname(self):
+        """Test that base_url rejects URLs without a hostname."""
+        with pytest.raises(ValueError, match="valid hostname"):
+            PlatformConfig(base_url="https://")
+
+    def test_base_url_accepts_none(self):
+        """Test that base_url accepts None."""
+        config = PlatformConfig(base_url=None)
+        assert config.base_url is None
 
 
 class TestGiteagleConfig:
@@ -210,3 +231,14 @@ class TestSaveConfig:
             data = yaml.safe_load(f)
 
         assert data["github"]["token"] is None
+
+    def test_save_config_sets_restrictive_permissions(self, tmp_path):
+        """Test that saved config file has owner-only permissions."""
+        config_file = tmp_path / "config.yaml"
+        config = GiteagleConfig(github=PlatformConfig(token="secret"))
+
+        save_config(config, config_file)
+
+        file_stat = config_file.stat()
+        mode = file_stat.st_mode & 0o777
+        assert mode == 0o600, f"Expected 0o600 permissions, got {oct(mode)}"

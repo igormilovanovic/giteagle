@@ -7,7 +7,12 @@ import httpx
 import pytest
 
 from giteagle.core.models import Repository
-from giteagle.integrations.github import GitHubAPIError, GitHubClient, RateLimitError
+from giteagle.integrations.github import (
+    GitHubAPIError,
+    GitHubClient,
+    RateLimitError,
+    _validate_path_segment,
+)
 
 
 class TestGitHubClient:
@@ -401,3 +406,50 @@ class TestRateLimitError:
         assert str(error) == "Rate limit exceeded"
         assert error.status_code == 403
         assert error.reset_at == reset_at
+
+
+class TestPathSegmentValidation:
+    """Tests for URL path segment validation."""
+
+    def test_valid_segments(self):
+        """Test that valid owner/name values are accepted."""
+        assert _validate_path_segment("octocat", "owner") == "octocat"
+        assert _validate_path_segment("hello-world", "name") == "hello-world"
+        assert _validate_path_segment("my_repo.v2", "name") == "my_repo.v2"
+        assert _validate_path_segment("User123", "owner") == "User123"
+
+    def test_rejects_path_traversal(self):
+        """Test that path traversal attempts are rejected."""
+        with pytest.raises(ValueError, match="unsafe characters"):
+            _validate_path_segment("../etc/passwd", "owner")
+
+    def test_rejects_slashes(self):
+        """Test that slashes are rejected."""
+        with pytest.raises(ValueError, match="unsafe characters"):
+            _validate_path_segment("owner/name", "owner")
+
+    def test_rejects_empty_string(self):
+        """Test that empty strings are rejected."""
+        with pytest.raises(ValueError, match="unsafe characters"):
+            _validate_path_segment("", "owner")
+
+    def test_rejects_special_characters(self):
+        """Test that special characters are rejected."""
+        with pytest.raises(ValueError, match="unsafe characters"):
+            _validate_path_segment("owner%00name", "owner")
+
+    @pytest.mark.asyncio
+    async def test_get_repository_rejects_unsafe_owner(self):
+        """Test that get_repository rejects unsafe owner values."""
+        client = GitHubClient(token="test-token")
+        with pytest.raises(ValueError, match="unsafe characters"):
+            await client.get_repository("../admin", "repo")
+        await client.close()
+
+    @pytest.mark.asyncio
+    async def test_list_repositories_rejects_unsafe_org(self):
+        """Test that list_repositories rejects unsafe org values."""
+        client = GitHubClient(token="test-token")
+        with pytest.raises(ValueError, match="unsafe characters"):
+            await client.list_repositories(org="evil/org")
+        await client.close()
