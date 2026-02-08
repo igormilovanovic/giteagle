@@ -59,7 +59,7 @@ run_demo_command() {
 
     local output
     local exit_code=0
-    output=$(NO_COLOR=1 eval "${cmd}" 2>&1) || exit_code=$?
+    output=$(NO_COLOR=1 bash -c "${cmd}" 2>&1) || exit_code=$?
 
     output=$(printf '%s' "$output" | strip_ansi | strip_uv_warnings)
 

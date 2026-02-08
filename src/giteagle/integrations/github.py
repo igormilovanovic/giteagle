@@ -1,13 +1,26 @@
 """GitHub API integration."""
 
 import asyncio
-from datetime import datetime
+import logging
+import re
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 import httpx
 
 from giteagle.core.models import Activity, ActivityType, Contributor, Repository
 from giteagle.integrations.base import PlatformClient
+
+logger = logging.getLogger(__name__)
+
+_SAFE_PATH_SEGMENT = re.compile(r"^[a-zA-Z0-9._-]+$")
+
+
+def _validate_path_segment(value: str, name: str) -> str:
+    """Validate that a value is safe to use in a URL path segment."""
+    if not _SAFE_PATH_SEGMENT.match(value):
+        raise ValueError(f"Invalid {name}: {value!r} contains unsafe characters")
+    return value
 
 
 class GitHubAPIError(Exception):
@@ -76,7 +89,7 @@ class GitHubClient(PlatformClient):
                     remaining = response.headers.get("X-RateLimit-Remaining", "1")
                     if remaining == "0":
                         reset_timestamp = int(response.headers.get("X-RateLimit-Reset", "0"))
-                        reset_at = datetime.fromtimestamp(reset_timestamp)
+                        reset_at = datetime.fromtimestamp(reset_timestamp, tz=timezone.utc)
                         raise RateLimitError(reset_at)
 
                 if response.status_code == 404:
@@ -150,6 +163,8 @@ class GitHubClient(PlatformClient):
 
     async def get_repository(self, owner: str, name: str) -> Repository:
         """Fetch repository information."""
+        _validate_path_segment(owner, "owner")
+        _validate_path_segment(name, "name")
         data = await self._request("GET", f"/repos/{owner}/{name}")
         return self._parse_repository(data)
 
@@ -160,8 +175,10 @@ class GitHubClient(PlatformClient):
     ) -> list[Repository]:
         """List repositories for a user or organization."""
         if org:
+            _validate_path_segment(org, "org")
             path = f"/orgs/{org}/repos"
         elif owner:
+            _validate_path_segment(owner, "owner")
             path = f"/users/{owner}/repos"
         else:
             path = "/user/repos"
@@ -205,7 +222,7 @@ class GitHubClient(PlatformClient):
             try:
                 timestamp = datetime.fromisoformat(timestamp_str.replace("Z", "+00:00"))
             except ValueError:
-                timestamp = datetime.now()
+                timestamp = datetime.now(tz=timezone.utc)
 
             activity = Activity(
                 id=f"github:commit:{commit['sha']}",
@@ -335,12 +352,11 @@ class GitHubClient(PlatformClient):
 
         activities: list[Activity] = []
 
-        if isinstance(commits, list):
-            activities.extend(commits)
-        if isinstance(prs, list):
-            activities.extend(prs)
-        if isinstance(issues, list):
-            activities.extend(issues)
+        for label, result in [("commits", commits), ("pull_requests", prs), ("issues", issues)]:
+            if isinstance(result, BaseException):
+                logger.warning("Failed to fetch %s for %s: %s", label, repository.full_name, result)
+            elif isinstance(result, list):
+                activities.extend(result)
 
         # Sort by timestamp descending
         activities.sort(key=lambda a: a.timestamp, reverse=True)

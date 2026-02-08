@@ -25,7 +25,7 @@ T = TypeVar("T")
 
 def run_async(coro: Coroutine[Any, Any, T]) -> T:
     """Run an async function in the event loop."""
-    return asyncio.get_event_loop().run_until_complete(coro)
+    return asyncio.run(coro)
 
 
 def truncate_description(description: str | None, max_len: int = 50) -> str:
