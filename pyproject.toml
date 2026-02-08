@@ -44,8 +44,8 @@ dev = [
 giteagle = "giteagle.cli.main:cli"
 
 [project.urls]
-Homepage = "https://github.com/pletisan/giteagle"
-Repository = "https://github.com/pletisan/giteagle"
+Homepage = "https://github.com/igormilovanovic/giteagle"
+Repository = "https://github.com/igormilovanovic/giteagle"
 
 [build-system]
 requires = ["hatchling"]
