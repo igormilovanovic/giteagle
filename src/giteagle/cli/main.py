@@ -1,5 +1,7 @@
 """Main CLI entry point for Giteagle."""
 
+from __future__ import annotations
+
 import asyncio
 from datetime import datetime, timedelta
 
