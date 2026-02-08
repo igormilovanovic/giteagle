@@ -81,3 +81,7 @@ uv run pytest --cov           # Test with coverage
 - Follow existing patterns in the codebase.
 - All code must pass `ruff check` and `ruff format --check`.
 - All code must pass `mypy` type checking.
+
+## Attribution
+
+- NEVER add AI-generated signatures, badges, or footers to commits, PRs, issues, or code. This includes lines like "Generated with Claude Code", "Co-Authored-By: Claude", or any similar attribution. All contributions should appear as normal developer contributions.
