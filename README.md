@@ -55,16 +55,17 @@ Modern software development often involves **multi-repository architectures**:
 ### Installation
 
 ```bash
-# Using uv (recommended)
-uv tool install giteagle
-
-# Or with pip
-pip install giteagle
-
-# Or install from source
-git clone https://github.com/pletisan/giteagle.git
+# Install from local source (recommended for development)
+git clone https://github.com/igormilovanovic/giteagle.git
 cd giteagle
+uv tool install .
+
+# Or editable/development install (changes reflect immediately)
+uv tool install -e .
+
+# Or just run directly without installing
 uv sync
+uv run giteagle --help
 ```
 
 ### Configuration
