@@ -11,8 +11,8 @@ from pydantic import BaseModel, ConfigDict, Field, SecretStr
 class PlatformConfig(BaseModel):
     """Configuration for a single platform."""
 
-    token: Optional[SecretStr] = Field(None, description="API token")
-    base_url: Optional[str] = Field(None, description="Base API URL (for enterprise)")
+    token: Optional[SecretStr] = Field(default=None, description="API token")
+    base_url: Optional[str] = Field(default=None, description="Base API URL (for enterprise)")
 
 
 class GiteagleConfig(BaseModel):
@@ -20,12 +20,12 @@ class GiteagleConfig(BaseModel):
 
     model_config = ConfigDict(extra="ignore")
 
-    github: PlatformConfig = Field(default_factory=PlatformConfig)
-    gitlab: PlatformConfig = Field(default_factory=PlatformConfig)
-    bitbucket: PlatformConfig = Field(default_factory=PlatformConfig)
-    default_platform: str = Field("github", description="Default platform to use")
-    cache_ttl: int = Field(300, description="Cache TTL in seconds")
-    max_concurrent_requests: int = Field(10, description="Max concurrent API requests")
+    github: PlatformConfig = PlatformConfig()
+    gitlab: PlatformConfig = PlatformConfig()
+    bitbucket: PlatformConfig = PlatformConfig()
+    default_platform: str = "github"
+    cache_ttl: int = 300
+    max_concurrent_requests: int = 10
 
 
 def get_config_path() -> Path:

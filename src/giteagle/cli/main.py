@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import asyncio
+from collections.abc import Coroutine
 from datetime import datetime, timedelta
+from typing import Any, TypeVar
 
 import click
 from rich import box
@@ -18,8 +20,10 @@ from giteagle.integrations import GitHubClient
 
 console = Console()
 
+T = TypeVar("T")
 
-def run_async(coro):
+
+def run_async(coro: Coroutine[Any, Any, T]) -> T:
     """Run an async function in the event loop."""
     return asyncio.get_event_loop().run_until_complete(coro)
 
@@ -51,7 +55,7 @@ def repos(ctx: click.Context, owner: str, org: bool) -> None:
     config = ctx.obj["config"]
     token = config.github.token.get_secret_value() if config.github.token else None
 
-    async def fetch_repos():
+    async def fetch_repos() -> list:
         async with GitHubClient(token=token) as client:
             if org:
                 return await client.list_repositories(org=owner)
@@ -101,7 +105,7 @@ def activity(ctx: click.Context, repo: str, days: int, limit: int) -> None:
     owner, name = repo.split("/", 1)
     since = datetime.now() - timedelta(days=days)
 
-    async def fetch_activity():
+    async def fetch_activity() -> tuple:
         async with GitHubClient(token=token) as client:
             repository = await client.get_repository(owner, name)
             activities = await client.get_activities(repository, since=since, limit=limit)
@@ -159,7 +163,7 @@ def summary(ctx: click.Context, repos: tuple, days: int) -> None:
     token = config.github.token.get_secret_value() if config.github.token else None
     since = datetime.now() - timedelta(days=days)
 
-    async def fetch_all():
+    async def fetch_all() -> ActivityAggregator:
         async with GitHubClient(token=token) as client:
             aggregator = ActivityAggregator()
 
@@ -248,7 +252,7 @@ def timeline(ctx: click.Context, repos: tuple, days: int, granularity: str) -> N
     token = config.github.token.get_secret_value() if config.github.token else None
     since = datetime.now() - timedelta(days=days)
 
-    async def fetch_all():
+    async def fetch_all() -> ActivityAggregator:
         async with GitHubClient(token=token) as client:
             aggregator = ActivityAggregator()
 
