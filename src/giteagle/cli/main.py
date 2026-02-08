@@ -2,13 +2,12 @@
 
 import asyncio
 from datetime import datetime, timedelta
-from typing import Optional
 
 import click
-from rich.console import Console
-from rich.table import Table
-from rich.panel import Panel
 from rich import box
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
 
 from giteagle import __version__
 from giteagle.config import load_config
@@ -21,6 +20,15 @@ console = Console()
 def run_async(coro):
     """Run an async function in the event loop."""
     return asyncio.get_event_loop().run_until_complete(coro)
+
+
+def truncate_description(description: str | None, max_len: int = 50) -> str:
+    """Truncate a description to a maximum length."""
+    if not description:
+        return ""
+    if len(description) > max_len:
+        return description[:max_len] + "..."
+    return description
 
 
 @click.group()
@@ -51,7 +59,7 @@ def repos(ctx: click.Context, owner: str, org: bool) -> None:
         repositories = run_async(fetch_repos())
     except Exception as e:
         console.print(f"[red]Error:[/red] {e}")
-        raise SystemExit(1)
+        raise SystemExit(1) from None
 
     table = Table(title=f"Repositories for {owner}", box=box.ROUNDED)
     table.add_column("Name", style="cyan")
@@ -62,7 +70,7 @@ def repos(ctx: click.Context, owner: str, org: bool) -> None:
     for repo in repositories:
         table.add_row(
             repo.name,
-            (repo.description or "")[:50] + "..." if repo.description and len(repo.description) > 50 else repo.description or "",
+            truncate_description(repo.description),
             repo.default_branch,
             "Yes" if repo.is_private else "No",
         )
@@ -101,13 +109,15 @@ def activity(ctx: click.Context, repo: str, days: int, limit: int) -> None:
         repository, activities = run_async(fetch_activity())
     except Exception as e:
         console.print(f"[red]Error:[/red] {e}")
-        raise SystemExit(1)
+        raise SystemExit(1) from None
 
-    console.print(Panel(
-        f"[bold]{repository.full_name}[/bold]\n{repository.description or 'No description'}",
-        title="Repository",
-        box=box.ROUNDED,
-    ))
+    console.print(
+        Panel(
+            f"[bold]{repository.full_name}[/bold]\n{repository.description or 'No description'}",
+            title="Repository",
+            box=box.ROUNDED,
+        )
+    )
 
     table = Table(title=f"Activity (last {days} days)", box=box.ROUNDED)
     table.add_column("Type", style="cyan", width=12)
@@ -161,7 +171,9 @@ def summary(ctx: click.Context, repos: tuple, days: int) -> None:
                     repository = await client.get_repository(owner, name)
                     activities = await client.get_activities(repository, since=since, limit=100)
                     aggregator.add_activities(activities)
-                    console.print(f"[dim]Fetched {len(activities)} activities from {repo_name}[/dim]")
+                    console.print(
+                        f"[dim]Fetched {len(activities)} activities from {repo_name}[/dim]"
+                    )
                 except Exception as e:
                     console.print(f"[yellow]Warning:[/yellow] Failed to fetch {repo_name}: {e}")
 
@@ -171,18 +183,20 @@ def summary(ctx: click.Context, repos: tuple, days: int) -> None:
         aggregator = run_async(fetch_all())
     except Exception as e:
         console.print(f"[red]Error:[/red] {e}")
-        raise SystemExit(1)
+        raise SystemExit(1) from None
 
     result = aggregator.aggregate(since=since)
 
     # Summary panel
-    console.print(Panel(
-        f"[bold]Total Activities:[/bold] {result.total_count}\n"
-        f"[bold]Repositories:[/bold] {len(result.by_repository)}\n"
-        f"[bold]Contributors:[/bold] {len(result.by_contributor)}",
-        title=f"Summary (last {days} days)",
-        box=box.ROUNDED,
-    ))
+    console.print(
+        Panel(
+            f"[bold]Total Activities:[/bold] {result.total_count}\n"
+            f"[bold]Repositories:[/bold] {len(result.by_repository)}\n"
+            f"[bold]Contributors:[/bold] {len(result.by_contributor)}",
+            title=f"Summary (last {days} days)",
+            box=box.ROUNDED,
+        )
+    )
 
     # Activity types breakdown
     if result.by_type:
@@ -190,7 +204,8 @@ def summary(ctx: click.Context, repos: tuple, days: int) -> None:
         type_table.add_column("Type", style="cyan")
         type_table.add_column("Count", style="white", justify="right")
 
-        for activity_type, count in sorted(result.by_type.items(), key=lambda x: x[1], reverse=True):
+        sorted_types = sorted(result.by_type.items(), key=lambda x: x[1], reverse=True)
+        for activity_type, count in sorted_types:
             type_table.add_row(activity_type.value, str(count))
 
         console.print(type_table)
@@ -213,7 +228,8 @@ def summary(ctx: click.Context, repos: tuple, days: int) -> None:
         repo_table.add_column("Repository", style="cyan")
         repo_table.add_column("Activities", style="white", justify="right")
 
-        for repo_name, count in sorted(result.by_repository.items(), key=lambda x: x[1], reverse=True):
+        sorted_repos = sorted(result.by_repository.items(), key=lambda x: x[1], reverse=True)
+        for repo_name, count in sorted_repos:
             repo_table.add_row(repo_name, str(count))
 
         console.print(repo_table)
@@ -252,7 +268,7 @@ def timeline(ctx: click.Context, repos: tuple, days: int, granularity: str) -> N
         aggregator = run_async(fetch_all())
     except Exception as e:
         console.print(f"[red]Error:[/red] {e}")
-        raise SystemExit(1)
+        raise SystemExit(1) from None
 
     timeline_data = aggregator.get_activity_timeline(granularity=granularity, since=since)
 
@@ -263,10 +279,12 @@ def timeline(ctx: click.Context, repos: tuple, days: int, granularity: str) -> N
     # Find max for scaling
     max_count = max(timeline_data.values())
 
-    console.print(Panel(
-        f"Activity Timeline ({granularity}ly)",
-        box=box.ROUNDED,
-    ))
+    console.print(
+        Panel(
+            f"Activity Timeline ({granularity}ly)",
+            box=box.ROUNDED,
+        )
+    )
 
     for date, count in timeline_data.items():
         bar_width = int((count / max_count) * 40) if max_count > 0 else 0
@@ -292,7 +310,10 @@ def config(ctx: click.Context) -> None:
     table.add_row("Bitbucket Token", "***" if cfg.bitbucket.token else "[red]Not set[/red]")
 
     console.print(table)
-    console.print("\n[dim]Set tokens via GITHUB_TOKEN, GITLAB_TOKEN, BITBUCKET_TOKEN environment variables[/dim]")
+    console.print(
+        "\n[dim]Set tokens via GITHUB_TOKEN, GITLAB_TOKEN, "
+        "BITBUCKET_TOKEN environment variables[/dim]"
+    )
 
 
 if __name__ == "__main__":

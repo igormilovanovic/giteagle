@@ -92,11 +92,11 @@ class GitHubClient(PlatformClient):
             except httpx.TimeoutException:
                 last_error = GitHubAPIError("Request timed out")
                 if attempt < retry_count - 1:
-                    await asyncio.sleep(2 ** attempt)
+                    await asyncio.sleep(2**attempt)
             except httpx.NetworkError as e:
                 last_error = GitHubAPIError(f"Network error: {e}")
                 if attempt < retry_count - 1:
-                    await asyncio.sleep(2 ** attempt)
+                    await asyncio.sleep(2**attempt)
 
         raise last_error or GitHubAPIError("Unknown error")
 
@@ -309,7 +309,7 @@ class GitHubClient(PlatformClient):
                 metadata={
                     "number": issue["number"],
                     "state": issue["state"],
-                    "labels": [l["name"] for l in issue.get("labels", [])],
+                    "labels": [label["name"] for label in issue.get("labels", [])],
                 },
             )
             activities.append(activity)

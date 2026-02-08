@@ -2,10 +2,8 @@
 
 from datetime import datetime, timedelta
 
-import pytest
-
 from giteagle.core.aggregator import ActivityAggregator
-from giteagle.core.models import Activity, ActivityType, Contributor, Repository
+from giteagle.core.models import Activity, ActivityType, Repository
 
 
 class TestActivityAggregator:
@@ -68,16 +66,18 @@ class TestActivityAggregator:
         now = datetime.now()
         for i, repo in enumerate(multiple_repos):
             for j in range(i + 1):  # repo-1: 1, repo-2: 2, repo-3: 3
-                aggregator.add_activities([
-                    Activity(
-                        id=f"activity-{repo.name}-{j}",
-                        type=ActivityType.COMMIT,
-                        repository=repo,
-                        contributor=sample_contributor,
-                        timestamp=now - timedelta(hours=i * 10 + j),
-                        title=f"Commit {j}",
-                    )
-                ])
+                aggregator.add_activities(
+                    [
+                        Activity(
+                            id=f"activity-{repo.name}-{j}",
+                            type=ActivityType.COMMIT,
+                            repository=repo,
+                            contributor=sample_contributor,
+                            timestamp=now - timedelta(hours=i * 10 + j),
+                            title=f"Commit {j}",
+                        )
+                    ]
+                )
 
         # Filter by first repo
         repo1_activities = aggregator.filter(repositories=[multiple_repos[0]])
@@ -116,28 +116,32 @@ class TestActivityAggregator:
 
         # Add 2 activities for repo-1, 3 for repo-2
         for i in range(2):
-            aggregator.add_activities([
-                Activity(
-                    id=f"r1-{i}",
-                    type=ActivityType.COMMIT,
-                    repository=multiple_repos[0],
-                    contributor=sample_contributor,
-                    timestamp=now - timedelta(hours=i),
-                    title=f"Commit {i}",
-                )
-            ])
+            aggregator.add_activities(
+                [
+                    Activity(
+                        id=f"r1-{i}",
+                        type=ActivityType.COMMIT,
+                        repository=multiple_repos[0],
+                        contributor=sample_contributor,
+                        timestamp=now - timedelta(hours=i),
+                        title=f"Commit {i}",
+                    )
+                ]
+            )
 
         for i in range(3):
-            aggregator.add_activities([
-                Activity(
-                    id=f"r2-{i}",
-                    type=ActivityType.COMMIT,
-                    repository=multiple_repos[1],
-                    contributor=sample_contributor,
-                    timestamp=now - timedelta(hours=i),
-                    title=f"Commit {i}",
-                )
-            ])
+            aggregator.add_activities(
+                [
+                    Activity(
+                        id=f"r2-{i}",
+                        type=ActivityType.COMMIT,
+                        repository=multiple_repos[1],
+                        contributor=sample_contributor,
+                        timestamp=now - timedelta(hours=i),
+                        title=f"Commit {i}",
+                    )
+                ]
+            )
 
         result = aggregator.aggregate()
 
@@ -205,16 +209,18 @@ class TestActivityAggregator:
 
         # Add activities on different days
         for i in range(5):
-            aggregator.add_activities([
-                Activity(
-                    id=f"activity-{i}",
-                    type=ActivityType.COMMIT,
-                    repository=repo,
-                    contributor=sample_contributor,
-                    timestamp=now - timedelta(days=i),
-                    title=f"Commit {i}",
-                )
-            ])
+            aggregator.add_activities(
+                [
+                    Activity(
+                        id=f"activity-{i}",
+                        type=ActivityType.COMMIT,
+                        repository=repo,
+                        contributor=sample_contributor,
+                        timestamp=now - timedelta(days=i),
+                        title=f"Commit {i}",
+                    )
+                ]
+            )
 
         timeline = aggregator.get_activity_timeline(granularity="day")
 
@@ -240,16 +246,18 @@ class TestActivityAggregator:
         counts = [5, 3, 8]
         for repo, count in zip(multiple_repos, counts):
             for i in range(count):
-                aggregator.add_activities([
-                    Activity(
-                        id=f"{repo.name}-{i}",
-                        type=ActivityType.COMMIT,
-                        repository=repo,
-                        contributor=sample_contributor,
-                        timestamp=now - timedelta(hours=i),
-                        title=f"Commit {i}",
-                    )
-                ])
+                aggregator.add_activities(
+                    [
+                        Activity(
+                            id=f"{repo.name}-{i}",
+                            type=ActivityType.COMMIT,
+                            repository=repo,
+                            contributor=sample_contributor,
+                            timestamp=now - timedelta(hours=i),
+                            title=f"Commit {i}",
+                        )
+                    ]
+                )
 
         most_active = aggregator.get_most_active_repositories(limit=2)
 

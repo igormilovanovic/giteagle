@@ -1,13 +1,17 @@
 """Tests for configuration management."""
 
 import os
-from pathlib import Path
 from unittest import mock
 
-import pytest
 import yaml
 
-from giteagle.config import GiteagleConfig, PlatformConfig, load_config, save_config, get_config_path
+from giteagle.config import (
+    GiteagleConfig,
+    PlatformConfig,
+    get_config_path,
+    load_config,
+    save_config,
+)
 
 
 class TestPlatformConfig:
@@ -78,10 +82,14 @@ class TestGetConfigPath:
         config_file = config_dir / "config.yaml"
         config_file.touch()
 
-        with mock.patch.dict(os.environ, {
-            "XDG_CONFIG_HOME": str(xdg_config),
-            "GITEAGLE_CONFIG": "",
-        }, clear=False):
+        with mock.patch.dict(
+            os.environ,
+            {
+                "XDG_CONFIG_HOME": str(xdg_config),
+                "GITEAGLE_CONFIG": "",
+            },
+            clear=False,
+        ):
             # Remove GITEAGLE_CONFIG if set
             os.environ.pop("GITEAGLE_CONFIG", None)
             path = get_config_path()

@@ -7,7 +7,7 @@ import httpx
 import pytest
 
 from giteagle.core.models import Repository
-from giteagle.integrations.github import GitHubClient, GitHubAPIError, RateLimitError
+from giteagle.integrations.github import GitHubAPIError, GitHubClient, RateLimitError
 
 
 class TestGitHubClient:
@@ -99,9 +99,7 @@ class TestGitHubClient:
             },
         )
 
-        with mock.patch.object(
-            mock_client._client, "request", return_value=mock_response
-        ):
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
             repo = await mock_client.get_repository("testowner", "test-repo")
 
         assert repo.name == "test-repo"
@@ -114,9 +112,7 @@ class TestGitHubClient:
         """Test handling 404 response."""
         mock_response = httpx.Response(404, json={"message": "Not Found"})
 
-        with mock.patch.object(
-            mock_client._client, "request", return_value=mock_response
-        ):
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
             with pytest.raises(GitHubAPIError) as exc_info:
                 await mock_client.get_repository("testowner", "nonexistent")
 
@@ -136,9 +132,7 @@ class TestGitHubClient:
             json={"message": "Rate limit exceeded"},
         )
 
-        with mock.patch.object(
-            mock_client._client, "request", return_value=mock_response
-        ):
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
             with pytest.raises(RateLimitError) as exc_info:
                 await mock_client.get_repository("testowner", "test-repo")
 
@@ -171,9 +165,7 @@ class TestGitHubClient:
             ],
         )
 
-        with mock.patch.object(
-            mock_client._client, "request", return_value=mock_response
-        ):
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
             repos = await mock_client.list_repositories(owner="testuser")
 
         assert len(repos) == 2
@@ -214,9 +206,7 @@ class TestGitHubClient:
             ],
         )
 
-        with mock.patch.object(
-            mock_client._client, "request", return_value=mock_response
-        ):
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
             activities = await mock_client.get_commits(repo)
 
         assert len(activities) == 1
@@ -252,9 +242,7 @@ class TestGitHubClient:
             ],
         )
 
-        with mock.patch.object(
-            mock_client._client, "request", return_value=mock_response
-        ):
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
             activities = await mock_client.get_pull_requests(repo)
 
         assert len(activities) == 1
@@ -299,9 +287,7 @@ class TestGitHubClient:
             ],
         )
 
-        with mock.patch.object(
-            mock_client._client, "request", return_value=mock_response
-        ):
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
             activities = await mock_client.get_issues(repo)
 
         # Should only include actual issues, not PRs
@@ -372,9 +358,7 @@ class TestGitHubClient:
 
             return httpx.Response(200, json=[])
 
-        with mock.patch.object(
-            mock_client._client, "request", side_effect=mock_request
-        ):
+        with mock.patch.object(mock_client._client, "request", side_effect=mock_request):
             activities = await mock_client.get_activities(repo)
 
         assert len(activities) == 3
