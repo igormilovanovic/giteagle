@@ -350,12 +350,8 @@ def log_cmd(ctx: click.Context, repos: tuple, days: int, limit: int, author: str
                 owner, name = repo_name.split("/", 1)
                 try:
                     repository = await client.get_repository(owner, name)
-                    activities = await client.get_activities(
-                        repository, since=since, limit=limit
-                    )
-                    commits = [
-                        a for a in activities if a.type == ActivityType.COMMIT
-                    ]
+                    activities = await client.get_activities(repository, since=since, limit=limit)
+                    commits = [a for a in activities if a.type == ActivityType.COMMIT]
                     all_commits.extend(commits)
                     console.print(f"[dim]Fetched {len(commits)} commits from {repo_name}[/dim]")
                 except Exception as e:
