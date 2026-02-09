@@ -235,6 +235,7 @@ class GitHubClient(PlatformClient):
                 url=commit.get("html_url"),
                 metadata={
                     "sha": commit["sha"],
+                    "parents": [p["sha"] for p in commit.get("parents", [])],
                     "stats": commit.get("stats", {}),
                 },
             )
