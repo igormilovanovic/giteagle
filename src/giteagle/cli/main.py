@@ -14,6 +14,7 @@ from rich.panel import Panel
 from rich.table import Table
 
 from giteagle import __version__
+from giteagle.cli.log_renderer import assign_repo_colors, get_display_names, render_log
 from giteagle.config import load_config
 from giteagle.core import ActivityAggregator, ActivityType
 from giteagle.integrations import GitHubClient
@@ -320,6 +321,60 @@ def config(ctx: click.Context) -> None:
         "\n[dim]Set tokens via GITHUB_TOKEN, GITLAB_TOKEN, "
         "BITBUCKET_TOKEN environment variables[/dim]"
     )
+
+
+@cli.command(name="log")
+@click.argument("repos", nargs=-1, required=True)
+@click.option("--days", default=7, help="Number of days to look back")
+@click.option("--limit", default=100, help="Maximum number of commits per repo")
+@click.option("--author", default=None, help="Filter by author username")
+@click.pass_context
+def log_cmd(ctx: click.Context, repos: tuple, days: int, limit: int, author: str | None) -> None:
+    """Show unified git log across multiple repositories.
+
+    REPOS should be in the format owner/name (e.g., octocat/hello-world)
+    """
+    config_obj = ctx.obj["config"]
+    token = config_obj.github.token.get_secret_value() if config_obj.github.token else None
+    since = datetime.now(tz=timezone.utc) - timedelta(days=days)
+
+    async def fetch_commits() -> list:
+        async with GitHubClient(token=token) as client:
+            all_commits: list = []
+
+            for repo_name in repos:
+                if "/" not in repo_name:
+                    console.print(f"[yellow]Warning:[/yellow] Skipping invalid repo: {repo_name}")
+                    continue
+
+                owner, name = repo_name.split("/", 1)
+                try:
+                    repository = await client.get_repository(owner, name)
+                    activities = await client.get_activities(repository, since=since, limit=limit)
+                    commits = [a for a in activities if a.type == ActivityType.COMMIT]
+                    all_commits.extend(commits)
+                    console.print(f"[dim]Fetched {len(commits)} commits from {repo_name}[/dim]")
+                except Exception as e:
+                    console.print(f"[yellow]Warning:[/yellow] Failed to fetch {repo_name}: {e}")
+
+            return all_commits
+
+    try:
+        commits = run_async(fetch_commits())
+    except Exception as e:
+        console.print(f"[red]Error:[/red] {e}")
+        raise SystemExit(1) from None
+
+    if author:
+        commits = [c for c in commits if c.contributor.username == author]
+
+    commits.sort(key=lambda a: a.timestamp, reverse=True)
+
+    repo_names = list({c.repository.full_name for c in commits})
+    repo_colors = assign_repo_colors(repo_names)
+    display_names = get_display_names(repo_names)
+
+    render_log(console, commits, repo_colors, display_names)
 
 
 if __name__ == "__main__":

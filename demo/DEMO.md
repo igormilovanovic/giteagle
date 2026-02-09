@@ -370,6 +370,55 @@ $ uv run giteagle timeline kubernetes/kubernetes kubernetes/minikube kubernetes/
 2026-02-02: ████████████████████████████████████████ 381
 ```
 
+## 6. Unified Git Log Across Repos
+
+Browse commits across multiple repositories in a single unified view, like `tig` but for multiple repos. Each repo gets a distinct color, commits are grouped by date, and merge commits are marked.
+
+```bash
+$ uv run giteagle log kubernetes/kubernetes kubernetes/minikube kubernetes/ingress-nginx --days 3 --limit 15
+```
+
+```
+Fetched 6 commits from kubernetes/kubernetes
+Fetched 0 commits from kubernetes/minikube
+Fetched 2 commits from kubernetes/ingress-nginx
+ ● 2026-02-08  ingress-nginx  328c38e  Template: Use `RawURLEncoding` instead of `URLEncoding` with padding removal. (#14535)
+ │             kubernetes     918b5ac  Merge pull request #136840 from atombrella/feature/fmt_sprintf_unneeded (merge)
+ │             kubernetes     7883039  Remove unneeded use of fmt.Sprintf in test/{integration,e2e}
+ ● 2026-02-07  ingress-nginx  6f1daa5  Docs: Clarify valid values for `proxy-request-buffering`. (#14532)
+ │             kubernetes     669b1de  Merge pull request #136767 from Sahil-4555/atomic-types-test (merge)
+ │             kubernetes     d863fbe  Merge pull request #135335 from carlory/cleanup (merge)
+ ● 2026-02-06  kubernetes     a4437af  Merge pull request #136621 from ermias19/fix-validatingadmissionpolicy-nil-panic (merge)
+ │             kubernetes     598922d  feat(wait): introduce waitOptions.RunWaitContext() (#136781)
+
+Total: 8 commits across 2 repositories
+```
+
+Filter to a specific contributor:
+
+```bash
+$ uv run giteagle log kubernetes/kubernetes kubernetes/minikube --author k8s-ci-robot --days 3
+```
+
+```
+Fetched 19 commits from kubernetes/kubernetes
+Fetched 0 commits from kubernetes/minikube
+ ● 2026-02-08  kubernetes  918b5ac  Merge pull request #136840 from atombrella/feature/fmt_sprintf_unneeded (merge)
+ ● 2026-02-07  kubernetes  669b1de  Merge pull request #136767 from Sahil-4555/atomic-types-test (merge)
+ │             kubernetes  d863fbe  Merge pull request #135335 from carlory/cleanup (merge)
+ ● 2026-02-06  kubernetes  a4437af  Merge pull request #136621 from ermias19/fix-validatingadmissionpolicy-nil-panic (merge)
+ │             kubernetes  17810c6  Merge pull request #136743 from ansilh/master (merge)
+ │             kubernetes  2023f44  Merge pull request #136291 from atombrella/feature/modernize_rangeint_test_integration_utils (merge)
+ │             kubernetes  1c91a55  Merge pull request #136798 from dims/mark-archived-deps-unwanted (merge)
+ │             kubernetes  c0e6971  Merge pull request #136710 from bart0sh/PR221-integration-add-implicit-extended-resources (merge)
+ │             kubernetes  38c2026  Merge pull request #136315 from liyuerich/commentstartauthorization (merge)
+ │             kubernetes  aba3dc7  Merge pull request #133759 from BenTheElder/integrationprocs (merge)
+ │             kubernetes  8972957  Merge pull request #135782 from richabanker/fifo-identity-metric (merge)
+ │             kubernetes  da9e038  Merge pull request #133845 from rbiamru/clarify-cpucfsquotaperiod (merge)
+
+Total: 12 commits across 1 repositories
+```
+
 ---
 
 *Demo completed at 2026-02-08 23:00:43 UTC.*

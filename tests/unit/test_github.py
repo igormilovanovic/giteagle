@@ -207,6 +207,7 @@ class TestGitHubClient:
                         "avatar_url": "https://avatars.example.com/testuser",
                     },
                     "html_url": "https://github.com/testowner/test-repo/commit/abc123",
+                    "parents": [{"sha": "parent1"}],
                 },
             ],
         )
@@ -218,6 +219,7 @@ class TestGitHubClient:
         assert activities[0].title == "Test commit message"
         assert activities[0].contributor.username == "testuser"
         assert activities[0].metadata["sha"] == "abc123"
+        assert activities[0].metadata["parents"] == ["parent1"]
 
         await mock_client.close()
 
@@ -321,6 +323,7 @@ class TestGitHubClient:
                 },
                 "author": {"login": "testuser"},
                 "html_url": "https://example.com/commit/abc123",
+                "parents": [{"sha": "parent1"}],
             },
         ]
 

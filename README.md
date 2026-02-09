@@ -99,6 +99,9 @@ giteagle summary kubernetes/kubernetes kubernetes/dashboard kubernetes/ingress-n
 
 # View activity timeline
 giteagle timeline hashicorp/terraform hashicorp/terraform-provider-aws --days 30
+
+# Unified git log across multiple repos
+giteagle log kubernetes/kubernetes kubernetes/dashboard --days 7
 ```
 
 ## Usage Examples
@@ -206,6 +209,32 @@ Activity (last 3 days)
 └──────────────┴────────────────────────────────────┴───────────┴──────────────────┘
 ```
 
+### Example 5: Unified Git Log Across Repos
+
+Browse commits across your entire project like `tig`, but for multiple repos:
+
+```bash
+giteagle log mycompany/api-gateway mycompany/user-service mycompany/shared-libs --days 7
+```
+
+Output:
+
+```text
+ ● 2024-01-15  api-gateway  a1b2c3f  Fix rate limiter bug
+ │             user-service d4e5f6a  Update auth middleware
+ ● 2024-01-14  api-gateway  b7c8d9e  Add /users endpoint (merge)
+ │             shared-libs  3d4e5f6  Bump version to 2.1
+ ● 2024-01-13  user-service 7a8b9c0  Refactor session handling
+
+ Total: 5 commits across 3 repositories
+```
+
+Filter by author:
+
+```bash
+giteagle log mycompany/api-gateway mycompany/user-service --author alice --days 14
+```
+
 ## CLI Reference
 
 ### Commands
@@ -216,6 +245,7 @@ Activity (last 3 days)
 | `giteagle activity <repo>` | Show recent activity for a repository |
 | `giteagle summary <repos...>` | Aggregated summary across multiple repos |
 | `giteagle timeline <repos...>` | Activity timeline visualization |
+| `giteagle log <repos...>` | Unified git log across multiple repos |
 | `giteagle config` | Show current configuration |
 
 ### Common Options
@@ -226,6 +256,7 @@ Activity (last 3 days)
 | `--limit N` | Maximum number of items to show (default: 50) |
 | `--org` | Treat owner as organization (for `repos` command) |
 | `--granularity` | Timeline granularity: day, week, month |
+| `--author` | Filter by author username (for `log` command) |
 
 ## Development
 
