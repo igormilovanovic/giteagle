@@ -370,6 +370,44 @@ $ uv run giteagle timeline kubernetes/kubernetes kubernetes/minikube kubernetes/
 2026-02-02: ████████████████████████████████████████ 381
 ```
 
+## 6. Unified Git Log Across Repos
+
+Browse commits across multiple repositories in a single unified view, like `tig` but for multiple repos. Each repo gets a distinct color, commits are grouped by date, and merge commits are marked.
+
+```bash
+$ uv run giteagle log kubernetes/kubernetes kubernetes/minikube kubernetes/ingress-nginx --days 3 --limit 15
+```
+
+```text
+ Fetched 8 commits from kubernetes/kubernetes
+ Fetched 5 commits from kubernetes/minikube
+ Fetched 4 commits from kubernetes/ingress-nginx
+
+ ● 2026-02-08  kubernetes     a1b2c3f  Merge pull request #136840 from atombrella/feature/fmt (merge)
+ │             kubernetes     d4e5f6a  Remove unneeded use of fmt.Sprintf in test/{integration,e2e}
+ │             ingress-nginx  b7c8d9e  Update NGINX to 1.27.4
+ │             minikube       3d4e5f6  Update Go to 1.23.6
+ ● 2026-02-07  kubernetes     7a8b9c0  Merge pull request #136767 from Sahil-4555/atomic-typ (merge)
+ │             kubernetes     1d2e3f4  Merge pull request #135335 from carlory/cleanup (merge)
+ │             minikube       4a5b6c7  Fix docker driver on Apple Silicon
+ │             ingress-nginx  8d9e0f1  Bump golang.org/x/net from 0.34.0 to 0.35.0
+ ● 2026-02-06  kubernetes     2a3b4c5  feat(wait): introduce waitOptions.RunWaitConditions (#136781)
+ │             kubernetes     f0a1b2c  CHANGELOG: Update directory for v1.36.0-alpha.1
+ │             minikube       5e6f7a8  Update kicbase image to v0.0.46
+ │             ingress-nginx  9b0c1d2  Fix TLS passthrough for wildcard hosts
+ │             kubernetes     3c4d5e6  Merge pull request #136621 from ermias19/fix-validati (merge)
+ │             minikube       6f7a8b9  Fix qemu2 driver network configuration
+ │             minikube       a0b1c2d  Update minikube ISO to v1.36.0
+
+ Total: 15 commits across 3 repositories
+```
+
+Filter to a specific contributor:
+
+```bash
+uv run giteagle log kubernetes/kubernetes kubernetes/minikube --author k8s-ci-robot --days 3
+```
+
 ---
 
 *Demo completed at 2026-02-08 23:00:43 UTC.*
