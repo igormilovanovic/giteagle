@@ -378,34 +378,45 @@ Browse commits across multiple repositories in a single unified view, like `tig`
 $ uv run giteagle log kubernetes/kubernetes kubernetes/minikube kubernetes/ingress-nginx --days 3 --limit 15
 ```
 
-```text
- Fetched 8 commits from kubernetes/kubernetes
- Fetched 5 commits from kubernetes/minikube
- Fetched 4 commits from kubernetes/ingress-nginx
+```
+Fetched 6 commits from kubernetes/kubernetes
+Fetched 0 commits from kubernetes/minikube
+Fetched 2 commits from kubernetes/ingress-nginx
+ ● 2026-02-08  ingress-nginx  328c38e  Template: Use `RawURLEncoding` instead of `URLEncoding` with padding removal. (#14535)
+ │             kubernetes     918b5ac  Merge pull request #136840 from atombrella/feature/fmt_sprintf_unneeded (merge)
+ │             kubernetes     7883039  Remove unneeded use of fmt.Sprintf in test/{integration,e2e}
+ ● 2026-02-07  ingress-nginx  6f1daa5  Docs: Clarify valid values for `proxy-request-buffering`. (#14532)
+ │             kubernetes     669b1de  Merge pull request #136767 from Sahil-4555/atomic-types-test (merge)
+ │             kubernetes     d863fbe  Merge pull request #135335 from carlory/cleanup (merge)
+ ● 2026-02-06  kubernetes     a4437af  Merge pull request #136621 from ermias19/fix-validatingadmissionpolicy-nil-panic (merge)
+ │             kubernetes     598922d  feat(wait): introduce waitOptions.RunWaitContext() (#136781)
 
- ● 2026-02-08  kubernetes     a1b2c3f  Merge pull request #136840 from atombrella/feature/fmt (merge)
- │             kubernetes     d4e5f6a  Remove unneeded use of fmt.Sprintf in test/{integration,e2e}
- │             ingress-nginx  b7c8d9e  Update NGINX to 1.27.4
- │             minikube       3d4e5f6  Update Go to 1.23.6
- ● 2026-02-07  kubernetes     7a8b9c0  Merge pull request #136767 from Sahil-4555/atomic-typ (merge)
- │             kubernetes     1d2e3f4  Merge pull request #135335 from carlory/cleanup (merge)
- │             minikube       4a5b6c7  Fix docker driver on Apple Silicon
- │             ingress-nginx  8d9e0f1  Bump golang.org/x/net from 0.34.0 to 0.35.0
- ● 2026-02-06  kubernetes     2a3b4c5  feat(wait): introduce waitOptions.RunWaitConditions (#136781)
- │             kubernetes     f0a1b2c  CHANGELOG: Update directory for v1.36.0-alpha.1
- │             minikube       5e6f7a8  Update kicbase image to v0.0.46
- │             ingress-nginx  9b0c1d2  Fix TLS passthrough for wildcard hosts
- │             kubernetes     3c4d5e6  Merge pull request #136621 from ermias19/fix-validati (merge)
- │             minikube       6f7a8b9  Fix qemu2 driver network configuration
- │             minikube       a0b1c2d  Update minikube ISO to v1.36.0
-
- Total: 15 commits across 3 repositories
+Total: 8 commits across 2 repositories
 ```
 
 Filter to a specific contributor:
 
 ```bash
-uv run giteagle log kubernetes/kubernetes kubernetes/minikube --author k8s-ci-robot --days 3
+$ uv run giteagle log kubernetes/kubernetes kubernetes/minikube --author k8s-ci-robot --days 3
+```
+
+```
+Fetched 19 commits from kubernetes/kubernetes
+Fetched 0 commits from kubernetes/minikube
+ ● 2026-02-08  kubernetes  918b5ac  Merge pull request #136840 from atombrella/feature/fmt_sprintf_unneeded (merge)
+ ● 2026-02-07  kubernetes  669b1de  Merge pull request #136767 from Sahil-4555/atomic-types-test (merge)
+ │             kubernetes  d863fbe  Merge pull request #135335 from carlory/cleanup (merge)
+ ● 2026-02-06  kubernetes  a4437af  Merge pull request #136621 from ermias19/fix-validatingadmissionpolicy-nil-panic (merge)
+ │             kubernetes  17810c6  Merge pull request #136743 from ansilh/master (merge)
+ │             kubernetes  2023f44  Merge pull request #136291 from atombrella/feature/modernize_rangeint_test_integration_utils (merge)
+ │             kubernetes  1c91a55  Merge pull request #136798 from dims/mark-archived-deps-unwanted (merge)
+ │             kubernetes  c0e6971  Merge pull request #136710 from bart0sh/PR221-integration-add-implicit-extended-resources (merge)
+ │             kubernetes  38c2026  Merge pull request #136315 from liyuerich/commentstartauthorization (merge)
+ │             kubernetes  aba3dc7  Merge pull request #133759 from BenTheElder/integrationprocs (merge)
+ │             kubernetes  8972957  Merge pull request #135782 from richabanker/fifo-identity-metric (merge)
+ │             kubernetes  da9e038  Merge pull request #133845 from rbiamru/clarify-cpucfsquotaperiod (merge)
+
+Total: 12 commits across 1 repositories
 ```
 
 ---
