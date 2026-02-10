@@ -305,6 +305,95 @@ class TestGitHubClient:
         await mock_client.close()
 
     @pytest.mark.asyncio
+    async def test_get_authenticated_user(self, mock_client):
+        """Test fetching the authenticated user's login."""
+        mock_response = httpx.Response(
+            200,
+            json={"login": "testuser", "id": 12345, "name": "Test User"},
+        )
+
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
+            username = await mock_client.get_authenticated_user()
+
+        assert username == "testuser"
+
+        await mock_client.close()
+
+    @pytest.mark.asyncio
+    async def test_get_pull_requests_includes_metadata_timestamps(self, mock_client):
+        """Test that PR metadata includes merged_at and closed_at."""
+        repo = Repository(
+            name="test-repo",
+            owner="testowner",
+            platform="github",
+            url="https://github.com/testowner/test-repo",
+        )
+
+        mock_response = httpx.Response(
+            200,
+            json=[
+                {
+                    "number": 42,
+                    "title": "Merged PR",
+                    "body": "This was merged",
+                    "state": "closed",
+                    "merged": True,
+                    "merged_at": "2024-01-15T12:00:00Z",
+                    "closed_at": "2024-01-15T12:00:00Z",
+                    "user": {"login": "contributor"},
+                    "html_url": "https://github.com/testowner/test-repo/pull/42",
+                    "created_at": "2024-01-15T10:30:00Z",
+                    "updated_at": "2024-01-15T12:00:00Z",
+                },
+            ],
+        )
+
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
+            activities = await mock_client.get_pull_requests(repo)
+
+        assert len(activities) == 1
+        assert activities[0].metadata["merged_at"] == "2024-01-15T12:00:00Z"
+        assert activities[0].metadata["closed_at"] == "2024-01-15T12:00:00Z"
+
+        await mock_client.close()
+
+    @pytest.mark.asyncio
+    async def test_get_issues_includes_closed_at(self, mock_client):
+        """Test that issue metadata includes closed_at."""
+        repo = Repository(
+            name="test-repo",
+            owner="testowner",
+            platform="github",
+            url="https://github.com/testowner/test-repo",
+        )
+
+        mock_response = httpx.Response(
+            200,
+            json=[
+                {
+                    "number": 10,
+                    "title": "Closed issue",
+                    "body": "This was closed",
+                    "state": "closed",
+                    "closed_at": "2024-01-15T14:00:00Z",
+                    "user": {"login": "reporter"},
+                    "html_url": "https://github.com/testowner/test-repo/issues/10",
+                    "created_at": "2024-01-15T10:30:00Z",
+                    "updated_at": "2024-01-15T14:00:00Z",
+                    "labels": [],
+                },
+            ],
+        )
+
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
+            activities = await mock_client.get_issues(repo)
+
+        assert len(activities) == 1
+        assert activities[0].metadata["closed_at"] == "2024-01-15T14:00:00Z"
+
+        await mock_client.close()
+
+    @pytest.mark.asyncio
     async def test_get_activities_combines_all_types(self, mock_client):
         """Test that get_activities combines commits, PRs, and issues."""
         repo = Repository(
