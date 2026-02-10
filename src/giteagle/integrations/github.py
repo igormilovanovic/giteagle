@@ -388,6 +388,33 @@ class GitHubClient(PlatformClient):
         path = f"/repos/{repository.owner}/{repository.name}/pulls"
         return await self._paginate(path, params=params, limit=limit)
 
+    async def get_closed_pull_requests(
+        self,
+        repository: Repository,
+        *,
+        since: Optional[datetime] = None,
+        limit: int = 200,
+    ) -> list[Any]:
+        """Fetch closed pull requests as raw GitHub API dicts."""
+        params: dict[str, Any] = {
+            "state": "closed",
+            "sort": "updated",
+            "direction": "desc",
+        }
+        path = f"/repos/{repository.owner}/{repository.name}/pulls"
+        prs = await self._paginate(path, params=params, limit=limit)
+
+        if since:
+            result: list[Any] = []
+            for pr in prs:
+                closed_at_str = pr.get("closed_at") or pr.get("updated_at", "")
+                if closed_at_str:
+                    closed_dt = datetime.fromisoformat(closed_at_str.replace("Z", "+00:00"))
+                    if closed_dt >= since:
+                        result.append(pr)
+            return result
+        return prs
+
     async def get_pr_reviews(
         self,
         repository: Repository,

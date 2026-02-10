@@ -428,6 +428,46 @@ class TestGitHubClient:
         await mock_client.close()
 
     @pytest.mark.asyncio
+    async def test_get_closed_pull_requests(self, mock_client):
+        """Test fetching closed pull requests as raw dicts."""
+        repo = Repository(
+            name="test-repo",
+            owner="testowner",
+            platform="github",
+            url="https://github.com/testowner/test-repo",
+        )
+
+        mock_response = httpx.Response(
+            200,
+            json=[
+                {
+                    "number": 42,
+                    "title": "Merged PR",
+                    "state": "closed",
+                    "merged_at": "2026-02-08T12:00:00Z",
+                    "closed_at": "2026-02-08T12:00:00Z",
+                    "updated_at": "2026-02-08T12:00:00Z",
+                },
+                {
+                    "number": 43,
+                    "title": "Closed unmerged",
+                    "state": "closed",
+                    "merged_at": None,
+                    "closed_at": "2026-02-08T14:00:00Z",
+                    "updated_at": "2026-02-08T14:00:00Z",
+                },
+            ],
+        )
+
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
+            prs = await mock_client.get_closed_pull_requests(repo)
+
+        assert len(prs) == 2
+        assert prs[0]["number"] == 42
+
+        await mock_client.close()
+
+    @pytest.mark.asyncio
     async def test_get_pr_reviews(self, mock_client):
         """Test fetching PR reviews."""
         repo = Repository(
