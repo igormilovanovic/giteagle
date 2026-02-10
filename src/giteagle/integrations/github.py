@@ -373,6 +373,47 @@ class GitHubClient(PlatformClient):
         login: str = data["login"]
         return login
 
+    async def get_open_pull_requests(
+        self,
+        repository: Repository,
+        *,
+        limit: int = 100,
+    ) -> list[Any]:
+        """Fetch open pull requests as raw GitHub API dicts."""
+        params: dict[str, Any] = {
+            "state": "open",
+            "sort": "created",
+            "direction": "asc",
+        }
+        path = f"/repos/{repository.owner}/{repository.name}/pulls"
+        return await self._paginate(path, params=params, limit=limit)
+
+    async def get_pr_reviews(
+        self,
+        repository: Repository,
+        pr_number: int,
+    ) -> list[Any]:
+        """Fetch reviews for a pull request."""
+        _validate_path_segment(str(pr_number), "pr_number")
+        path = f"/repos/{repository.owner}/{repository.name}/pulls/{pr_number}/reviews"
+        result = await self._request("GET", path)
+        if isinstance(result, list):
+            return result
+        return []
+
+    async def get_commit_status(
+        self,
+        repository: Repository,
+        sha: str,
+    ) -> dict[str, Any]:
+        """Fetch combined commit status for a ref."""
+        _validate_path_segment(sha, "sha")
+        path = f"/repos/{repository.owner}/{repository.name}/commits/{sha}/status"
+        result = await self._request("GET", path)
+        if isinstance(result, dict):
+            return result
+        return {"state": "unknown"}
+
     async def close(self) -> None:
         """Close the HTTP client."""
         await self._client.aclose()

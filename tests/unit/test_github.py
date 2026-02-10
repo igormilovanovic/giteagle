@@ -394,6 +394,97 @@ class TestGitHubClient:
         await mock_client.close()
 
     @pytest.mark.asyncio
+    async def test_get_open_pull_requests(self, mock_client):
+        """Test fetching open pull requests as raw dicts."""
+        repo = Repository(
+            name="test-repo",
+            owner="testowner",
+            platform="github",
+            url="https://github.com/testowner/test-repo",
+        )
+
+        mock_response = httpx.Response(
+            200,
+            json=[
+                {
+                    "number": 42,
+                    "title": "Add feature",
+                    "state": "open",
+                    "user": {"login": "alice"},
+                    "created_at": "2026-02-08T10:00:00Z",
+                    "head": {"sha": "abc123"},
+                    "labels": [],
+                },
+            ],
+        )
+
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
+            prs = await mock_client.get_open_pull_requests(repo)
+
+        assert len(prs) == 1
+        assert prs[0]["number"] == 42
+        assert prs[0]["state"] == "open"
+
+        await mock_client.close()
+
+    @pytest.mark.asyncio
+    async def test_get_pr_reviews(self, mock_client):
+        """Test fetching PR reviews."""
+        repo = Repository(
+            name="test-repo",
+            owner="testowner",
+            platform="github",
+            url="https://github.com/testowner/test-repo",
+        )
+
+        mock_response = httpx.Response(
+            200,
+            json=[
+                {
+                    "user": {"login": "reviewer1"},
+                    "state": "APPROVED",
+                    "submitted_at": "2026-02-08T12:00:00Z",
+                },
+                {
+                    "user": {"login": "reviewer2"},
+                    "state": "CHANGES_REQUESTED",
+                    "submitted_at": "2026-02-08T13:00:00Z",
+                },
+            ],
+        )
+
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
+            reviews = await mock_client.get_pr_reviews(repo, 42)
+
+        assert len(reviews) == 2
+        assert reviews[0]["state"] == "APPROVED"
+        assert reviews[1]["state"] == "CHANGES_REQUESTED"
+
+        await mock_client.close()
+
+    @pytest.mark.asyncio
+    async def test_get_commit_status(self, mock_client):
+        """Test fetching combined commit status."""
+        repo = Repository(
+            name="test-repo",
+            owner="testowner",
+            platform="github",
+            url="https://github.com/testowner/test-repo",
+        )
+
+        mock_response = httpx.Response(
+            200,
+            json={"state": "success", "total_count": 3, "statuses": []},
+        )
+
+        with mock.patch.object(mock_client._client, "request", return_value=mock_response):
+            status = await mock_client.get_commit_status(repo, "abc123")
+
+        assert status["state"] == "success"
+
+        await mock_client.close()
+
+    @pytest.mark.asyncio
     async def test_get_activities_combines_all_types(self, mock_client):
         """Test that get_activities combines commits, PRs, and issues."""
         repo = Repository(
