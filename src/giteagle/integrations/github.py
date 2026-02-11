@@ -281,6 +281,8 @@ class GitHubClient(PlatformClient):
                     "number": pr["number"],
                     "state": pr["state"],
                     "merged": pr.get("merged", False),
+                    "merged_at": pr.get("merged_at"),
+                    "closed_at": pr.get("closed_at"),
                     "additions": pr.get("additions", 0),
                     "deletions": pr.get("deletions", 0),
                 },
@@ -327,6 +329,7 @@ class GitHubClient(PlatformClient):
                 metadata={
                     "number": issue["number"],
                     "state": issue["state"],
+                    "closed_at": issue.get("closed_at"),
                     "labels": [label["name"] for label in issue.get("labels", [])],
                 },
             )
@@ -363,6 +366,12 @@ class GitHubClient(PlatformClient):
         activities.sort(key=lambda a: a.timestamp, reverse=True)
 
         return activities[:limit]
+
+    async def get_authenticated_user(self) -> str:
+        """Get the username of the authenticated user."""
+        data = await self._request("GET", "/user")
+        login: str = data["login"]
+        return login
 
     async def close(self) -> None:
         """Close the HTTP client."""

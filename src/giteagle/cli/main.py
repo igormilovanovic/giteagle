@@ -15,6 +15,7 @@ from rich.table import Table
 
 from giteagle import __version__
 from giteagle.cli.log_renderer import assign_repo_colors, get_display_names, render_log
+from giteagle.cli.standup_renderer import build_standup_data, compute_standup_since, render_standup
 from giteagle.config import load_config
 from giteagle.core import ActivityAggregator, ActivityType
 from giteagle.integrations import GitHubClient
@@ -375,6 +376,68 @@ def log_cmd(ctx: click.Context, repos: tuple, days: int, limit: int, author: str
     display_names = get_display_names(repo_names)
 
     render_log(console, commits, repo_colors, display_names)
+
+
+@cli.command()
+@click.argument("repos", nargs=-1, required=True)
+@click.option("--days", default=1, help="Number of days to look back (auto-adjusts for weekends)")
+@click.option("--author", default=None, help="Filter by author (default: authenticated user)")
+@click.pass_context
+def standup(ctx: click.Context, repos: tuple, days: int, author: str | None) -> None:
+    """Show daily standup report across repositories.
+
+    REPOS should be in the format owner/name (e.g., octocat/hello-world)
+    """
+    config_obj = ctx.obj["config"]
+    token = config_obj.github.token.get_secret_value() if config_obj.github.token else None
+    since = compute_standup_since(days)
+
+    async def fetch_standup() -> tuple[list, str | None]:
+        client = GitHubClient(token=token)
+        try:
+            resolved_author = author
+            if resolved_author is None and token:
+                try:
+                    resolved_author = await client.get_authenticated_user()
+                except Exception:
+                    pass
+
+            all_activities: list = []
+            for repo_name in repos:
+                if "/" not in repo_name:
+                    console.print(f"[yellow]Warning:[/yellow] Skipping invalid repo: {repo_name}")
+                    continue
+
+                owner, name = repo_name.split("/", 1)
+                try:
+                    repository = await client.get_repository(owner, name)
+                    activities = await client.get_activities(
+                        repository,
+                        since=since,
+                        limit=200,
+                    )
+                    all_activities.extend(activities)
+                    console.print(
+                        f"[dim]Fetched {len(activities)} activities from {repo_name}[/dim]"
+                    )
+                except Exception as e:
+                    console.print(f"[yellow]Warning:[/yellow] Failed to fetch {repo_name}: {e}")
+
+            return all_activities, resolved_author
+        finally:
+            await client.close()
+
+    try:
+        activities, resolved_author = run_async(fetch_standup())
+    except Exception as e:
+        console.print(f"[red]Error:[/red] {e}")
+        raise SystemExit(1) from None
+
+    if resolved_author:
+        activities = [a for a in activities if a.contributor.username == resolved_author]
+
+    standup_data = build_standup_data(activities, since)
+    render_standup(console, standup_data, author=resolved_author, since=since)
 
 
 if __name__ == "__main__":
