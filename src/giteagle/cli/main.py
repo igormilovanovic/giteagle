@@ -17,6 +17,7 @@ from giteagle import __version__
 from giteagle.cli.log_renderer import assign_repo_colors, get_display_names, render_log
 from giteagle.cli.prs_renderer import build_pr_infos, render_prs
 from giteagle.cli.standup_renderer import build_standup_data, compute_standup_since, render_standup
+from giteagle.cli.stats_renderer import build_pr_metrics, compute_repo_stats, render_stats
 from giteagle.config import load_config
 from giteagle.core import ActivityAggregator, ActivityType
 from giteagle.integrations import GitHubClient
@@ -519,6 +520,115 @@ def prs(ctx: click.Context, repos: tuple, author: str | None, stale: int) -> Non
         raise SystemExit(1) from None
 
     render_prs(console, pr_infos, stale_days=stale, author_filter=author)
+
+
+@cli.command()
+@click.argument("repos", nargs=-1, required=True)
+@click.option("--days", default=30, help="Time window in days for metrics")
+@click.pass_context
+def stats(ctx: click.Context, repos: tuple, days: int) -> None:
+    """Show DORA-style PR metrics across repositories.
+
+    REPOS should be in the format owner/name (e.g., octocat/hello-world)
+    """
+    config_obj = ctx.obj["config"]
+    token = config_obj.github.token.get_secret_value() if config_obj.github.token else None
+    now = datetime.now(tz=timezone.utc)
+    current_since = now - timedelta(days=days)
+    prev_since = current_since - timedelta(days=days)
+
+    async def fetch_stats() -> tuple[list, list]:
+        client = GitHubClient(token=token)
+        try:
+            current_repo_stats: list = []
+            previous_repo_stats: list = []
+
+            for repo_name in repos:
+                if "/" not in repo_name:
+                    console.print(f"[yellow]Warning:[/yellow] Skipping invalid repo: {repo_name}")
+                    continue
+
+                owner, name = repo_name.split("/", 1)
+                try:
+                    repository = await client.get_repository(owner, name)
+
+                    # Fetch closed PRs covering both windows
+                    closed_prs = await client.get_closed_pull_requests(
+                        repository, since=prev_since, limit=200
+                    )
+                    console.print(
+                        f"[dim]Fetched {len(closed_prs)} closed PRs from {repo_name}[/dim]"
+                    )
+
+                    # Split into current and previous windows
+                    current_prs = [
+                        pr
+                        for pr in closed_prs
+                        if pr.get("closed_at")
+                        and datetime.fromisoformat(pr["closed_at"].replace("Z", "+00:00"))
+                        >= current_since
+                    ]
+                    previous_prs = [
+                        pr
+                        for pr in closed_prs
+                        if pr.get("closed_at")
+                        and datetime.fromisoformat(pr["closed_at"].replace("Z", "+00:00"))
+                        < current_since
+                    ]
+
+                    # Fetch reviews for merged PRs concurrently
+                    merged_current = [pr for pr in current_prs if pr.get("merged_at")]
+                    merged_previous = [pr for pr in previous_prs if pr.get("merged_at")]
+
+                    all_merged = merged_current + merged_previous
+                    review_tasks = [
+                        client.get_pr_reviews(repository, pr["number"]) for pr in all_merged
+                    ]
+                    review_results = await asyncio.gather(*review_tasks, return_exceptions=True)
+
+                    reviews_map: dict[int, list] = {}
+                    for pr, result in zip(all_merged, review_results):
+                        if isinstance(result, list):
+                            reviews_map[pr["number"]] = result
+                        else:
+                            reviews_map[pr["number"]] = []
+
+                    # Build metrics for current and previous
+                    current_metrics = build_pr_metrics(current_prs, reviews_map, repo_name)
+                    previous_metrics = build_pr_metrics(previous_prs, reviews_map, repo_name)
+
+                    current_repo_stats.append(
+                        compute_repo_stats(
+                            current_metrics,
+                            len(current_prs),
+                            repo_name,
+                            window_days=days,
+                        )
+                    )
+                    if previous_metrics:
+                        previous_repo_stats.append(
+                            compute_repo_stats(
+                                previous_metrics,
+                                len(previous_prs),
+                                repo_name,
+                                window_days=days,
+                            )
+                        )
+
+                except Exception as e:
+                    console.print(f"[yellow]Warning:[/yellow] Failed to fetch {repo_name}: {e}")
+
+            return current_repo_stats, previous_repo_stats
+        finally:
+            await client.close()
+
+    try:
+        current_stats, previous_stats = run_async(fetch_stats())
+    except Exception as e:
+        console.print(f"[red]Error:[/red] {e}")
+        raise SystemExit(1) from None
+
+    render_stats(console, current_stats, previous_stats, window_days=days)
 
 
 if __name__ == "__main__":
