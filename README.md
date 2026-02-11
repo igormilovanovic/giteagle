@@ -44,6 +44,9 @@ Modern software development often involves **multi-repository architectures**:
 ## Features
 
 - **Unified Activity Feed** - See commits, PRs, and issues across all your repos in one view
+- **Standup Reports** - "What did I do yesterday?" across all repos, weekend-aware
+- **PR Dashboard** - Open PRs across repos with review status, CI status, and stale warnings
+- **DORA Metrics** - Time-to-merge, time-to-first-review, merge rate, throughput with trends
 - **Contributor Insights** - Track who's contributing where and how much
 - **Timeline Analysis** - Visualize activity patterns over time
 - **Cross-Repo Aggregation** - Combine statistics from multiple repositories
@@ -102,6 +105,15 @@ giteagle timeline hashicorp/terraform hashicorp/terraform-provider-aws --days 30
 
 # Unified git log across multiple repos
 giteagle log kubernetes/kubernetes kubernetes/dashboard --days 7
+
+# Daily standup report (auto-detects your GitHub user)
+giteagle standup mycompany/api mycompany/web --days 1
+
+# Open PR dashboard with review and CI status
+giteagle prs mycompany/api mycompany/web --stale 7
+
+# DORA-style PR metrics with trend comparison
+giteagle stats mycompany/api mycompany/web --days 30
 ```
 
 ## Usage Examples
@@ -235,6 +247,35 @@ Filter by author:
 giteagle log mycompany/api-gateway mycompany/user-service --author alice --days 14
 ```
 
+### Example 6: Daily Standup Report
+
+Generate a standup-ready summary of what you (or your team) did since yesterday. Weekend-aware — on Monday it looks back to Friday.
+
+```bash
+# Auto-detects your GitHub user from your token
+giteagle standup mycompany/api mycompany/web mycompany/shared-libs
+
+# Specific author, look back 2 days
+giteagle standup mycompany/api mycompany/web --author alice --days 2
+```
+
+### Example 7: Cross-Repo PR Dashboard
+
+See all open PRs across your repos with review status, CI status, and age. Stale PRs (older than `--stale` days) are highlighted.
+
+```bash
+giteagle prs mycompany/api mycompany/web mycompany/shared-libs --stale 7
+```
+
+### Example 8: DORA-Style PR Metrics
+
+Track engineering velocity with time-to-merge, time-to-first-review, merge rate, and throughput. Includes trend comparison vs the previous period.
+
+```bash
+# Last 30 days with trend comparison vs prior 30 days
+giteagle stats mycompany/api mycompany/web --days 30
+```
+
 ## CLI Reference
 
 ### Commands
@@ -246,17 +287,21 @@ giteagle log mycompany/api-gateway mycompany/user-service --author alice --days 
 | `giteagle summary <repos...>` | Aggregated summary across multiple repos |
 | `giteagle timeline <repos...>` | Activity timeline visualization |
 | `giteagle log <repos...>` | Unified git log across multiple repos |
+| `giteagle standup <repos...>` | Daily standup report across repos |
+| `giteagle prs <repos...>` | Cross-repo open PR dashboard |
+| `giteagle stats <repos...>` | DORA-style PR metrics and trends |
 | `giteagle config` | Show current configuration |
 
 ### Common Options
 
 | Option | Description |
 |--------|-------------|
-| `--days N` | Number of days to look back (default: 7) |
+| `--days N` | Number of days to look back (default varies by command) |
 | `--limit N` | Maximum number of items to show (default: 50) |
 | `--org` | Treat owner as organization (for `repos` command) |
 | `--granularity` | Timeline granularity: day, week, month |
-| `--author` | Filter by author username (for `log` command) |
+| `--author` | Filter by author username |
+| `--stale N` | Days after which a PR is considered stale (for `prs`, default: 7) |
 
 ## Development
 

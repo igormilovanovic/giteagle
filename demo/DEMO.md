@@ -1,6 +1,6 @@
 # Giteagle Demo: Kubernetes Ecosystem
 
-> **Generated on 2026-02-08 23:00:08 UTC**
+> **Generated on 2026-02-11 01:17:53 UTC**
 >
 > This demo showcases giteagle by querying real activity across the
 > [Kubernetes](https://github.com/kubernetes) GitHub organization.
@@ -252,52 +252,47 @@ $ uv run giteagle activity kubernetes/kubernetes --days 7 --limit 15
 ╭──────────────┬────────────────────────┬───────────────────┬──────────────────╮
 │ Type         │ Title                  │ Author            │ Date             │
 ├──────────────┼────────────────────────┼───────────────────┼──────────────────┤
-│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-08 19:23 │
-│              │ #136840 from           │                   │                  │
-│              │ atombrella/feature/fm… │                   │                  │
-│ issue        │ govulncheck fails with │ Pnkcaht           │ 2026-02-08 19:18 │
-│              │ internal errors when   │                   │                  │
-│              │ run against Kube...    │                   │                  │
-│ pull_request │ Remove unneeded use of │ atombrella        │ 2026-02-08 13:35 │
-│              │ fmt.Sprintf in         │                   │                  │
-│              │ test/{integration,e2e} │                   │                  │
-│ commit       │ Remove unneeded use of │ atombrella        │ 2026-02-08 13:34 │
-│              │ fmt.Sprintf in         │                   │                  │
-│              │ test/{integration,e2e} │                   │                  │
-│ pull_request │ kubectl create: mark   │ Mujib-Ahasan      │ 2026-02-07 21:43 │
-│              │ --edit flag as         │                   │                  │
-│              │ deprecated             │                   │                  │
-│ pull_request │ Enable declarative     │ darshansreenivas  │ 2026-02-07 20:42 │
-│              │ validation for apps    │                   │                  │
-│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-07 16:43 │
-│              │ #136767 from           │                   │                  │
-│              │ Sahil-4555/atomic-typ… │                   │                  │
-│ pull_request │ Update OpenTelemetry   │ dims              │ 2026-02-07 14:22 │
-│              │ dependencies to latest │                   │                  │
-│              │ versions               │                   │                  │
-│ pull_request │ Update go-openapi      │ dims              │ 2026-02-07 13:11 │
-│              │ dependencies           │                   │                  │
-│              │ (jsonpointer,          │                   │                  │
-│              │ jsonreference, ...     │                   │                  │
-│ pull_request │ Improve Job validation │ kairosci          │ 2026-02-07 12:55 │
-│              │ error message for      │                   │                  │
-│              │ startTime              │                   │                  │
-│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-07 01:00 │
-│              │ #135335 from           │                   │                  │
-│              │ carlory/cleanup        │                   │                  │
-│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-06 22:36 │
-│              │ #136621 from           │                   │                  │
-│              │ ermias19/fix-validati… │                   │                  │
-│ pull_request │ Validation-gen:        │ itzPranshul       │ 2026-02-06 20:37 │
-│              │ migrate                │                   │                  │
-│              │ ControllerRevision.Da… │                   │                  │
-│              │ to declarati...        │                   │                  │
-│ commit       │ feat(wait): introduce  │ AustinAbro321     │ 2026-02-06 20:10 │
-│              │ waitOptions.RunWaitCo… │                   │                  │
-│              │ (#136781)              │                   │                  │
-│ commit       │ CHANGELOG: Update      │ k8s-release-robot │ 2026-02-06 19:12 │
-│              │ directory for          │                   │                  │
-│              │ v1.36.0-alpha.1        │                   │                  │
+│ pull_request │ WIP: move go-runner    │ BenTheElder       │ 2026-02-11 00:59 │
+│              │ back to kubernetes     │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-11 00:42 │
+│              │ #135675 from           │                   │                  │
+│              │ richabanker/merged-di… │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-11 00:41 │
+│              │ #135395 from           │                   │                  │
+│              │ pohly/apimachinery-wa… │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-10 23:47 │
+│              │ #135256 from           │                   │                  │
+│              │ natasha41575/pod-gen-… │                   │                  │
+│ pull_request │ add dockerized go      │ BenTheElder       │ 2026-02-10 22:58 │
+│              │ cache chmod to  `make  │                   │                  │
+│              │ clean`                 │                   │                  │
+│ pull_request │ Pipe feature gate of   │ michaelasp        │ 2026-02-10 22:35 │
+│              │ unlockWhileProcessing  │                   │                  │
+│ pull_request │ Promote                │ troychiu          │ 2026-02-10 22:10 │
+│              │ DRAPrioritizedList to  │                   │                  │
+│              │ GA                     │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-10 21:30 │
+│              │ #136716 from           │                   │                  │
+│              │ yonizxz/concurrent-no… │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-10 21:30 │
+│              │ #134981 from           │                   │                  │
+│              │ haircommander/drop-cp… │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-10 19:54 │
+│              │ #136911 from           │                   │                  │
+│              │ pohly/dra-e2e-data-ra… │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-10 19:54 │
+│              │ #136734 from           │                   │                  │
+│              │ sunya-ch/sunya-ch/fix… │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-10 18:38 │
+│              │ #136826 from           │                   │                  │
+│              │ alvaroaleman/bumpv0.32 │                   │                  │
+│ commit       │ Merge pull request     │ k8s-ci-robot      │ 2026-02-10 18:38 │
+│              │ #136339 from           │                   │                  │
+│              │ ffromani/deprecate-cu… │                   │                  │
+│ pull_request │ test: fix the flaking  │ shwetha-s-poojary │ 2026-02-10 14:02 │
+│              │ TestWebhookConversion… │                   │                  │
+│ commit       │ CHANGELOG: Update      │ k8s-release-robot │ 2026-02-10 13:06 │
+│              │ directory for v1.32.12 │                   │                  │
 │              │ release                │                   │                  │
 ╰──────────────┴────────────────────────┴───────────────────┴──────────────────╯
 
@@ -315,38 +310,38 @@ $ uv run giteagle summary kubernetes/kubernetes kubernetes/minikube kubernetes/i
 
 ```
 Fetched 100 activities from kubernetes/kubernetes
-Fetched 94 activities from kubernetes/minikube
-Fetched 78 activities from kubernetes/ingress-nginx
+Fetched 61 activities from kubernetes/minikube
+Fetched 65 activities from kubernetes/ingress-nginx
 ╭─────────────────────────── Summary (last 7 days) ────────────────────────────╮
-│ Total Activities: 218                                                        │
+│ Total Activities: 190                                                        │
 │ Repositories: 3                                                              │
-│ Contributors: 62                                                             │
+│ Contributors: 56                                                             │
 ╰──────────────────────────────────────────────────────────────────────────────╯
     By Activity Type    
                         
   Type           Count  
  ────────────────────── 
-  pull_request     120  
-  commit            77  
-  issue             21  
+  pull_request      92  
+  commit            59  
+  issue             39  
                         
-      Top Contributors       
-                             
-  Username       Activities  
- ─────────────────────────── 
-  Gacko                  45  
-  k8s-ci-robot           28  
-  minikube-bot           20  
-  medyagh                18  
-  dependabot             18  
-                             
+             Top Contributors              
+                                           
+  Username                     Activities  
+ ───────────────────────────────────────── 
+  k8s-ci-robot                         29  
+  everettraven                         27  
+  Gacko                                22  
+  k8s-infra-cherrypick-robot           17  
+  minikube-bot                         14  
+                                           
               By Repository              
                                          
   Repository                 Activities  
  ─────────────────────────────────────── 
   kubernetes/kubernetes             100  
-  kubernetes/ingress-nginx           67  
-  kubernetes/minikube                51  
+  kubernetes/ingress-nginx           59  
+  kubernetes/minikube                31  
                                          
 ```
 
@@ -363,12 +358,13 @@ $ uv run giteagle timeline kubernetes/kubernetes kubernetes/minikube kubernetes/
 ╭──────────────────────────────────────────────────────────────────────────────╮
 │ Activity Timeline (weekly)                                                   │
 ╰──────────────────────────────────────────────────────────────────────────────╯
-2026-01-05: ███ 32
-2026-01-12: ████████████████████████ 229
-2026-01-19: ████████████████████ 194
-2026-01-26: ████████████████████████████████████ 352
-2026-02-02: ████████████████████████████████████████ 381
+2026-01-12: █████████████████████████ 228
+2026-01-19: ███████████████████ 176
+2026-01-26: ██████████████████████████████ 269
+2026-02-02: ████████████████████████████████████████ 355
+2026-02-09: ██████████████████ 167
 ```
+
 
 ## 6. Unified Git Log Across Repos
 
@@ -379,20 +375,42 @@ $ uv run giteagle log kubernetes/kubernetes kubernetes/minikube kubernetes/ingre
 ```
 
 ```
-Fetched 6 commits from kubernetes/kubernetes
-Fetched 0 commits from kubernetes/minikube
-Fetched 2 commits from kubernetes/ingress-nginx
- ● 2026-02-08  ingress-nginx  328c38e  Template: Use `RawURLEncoding` instead of `URLEncoding` with padding removal. (#14535)
- │             kubernetes     918b5ac  Merge pull request #136840 from atombrella/feature/fmt_sprintf_unneeded (merge)
- │             kubernetes     7883039  Remove unneeded use of fmt.Sprintf in test/{integration,e2e}
- ● 2026-02-07  ingress-nginx  6f1daa5  Docs: Clarify valid values for `proxy-request-buffering`. (#14532)
- │             kubernetes     669b1de  Merge pull request #136767 from Sahil-4555/atomic-types-test (merge)
- │             kubernetes     d863fbe  Merge pull request #135335 from carlory/cleanup (merge)
- ● 2026-02-06  kubernetes     a4437af  Merge pull request #136621 from ermias19/fix-validatingadmissionpolicy-nil-panic (merge)
- │             kubernetes     598922d  feat(wait): introduce waitOptions.RunWaitContext() (#136781)
+Fetched 10 commits from kubernetes/kubernetes
+Fetched 1 commits from kubernetes/minikube
+Fetched 4 commits from kubernetes/ingress-nginx
+ ● 2026-02-11  kubernetes     46ac9df  Merge pull request #135675 from 
+richabanker/merged-discovery (merge)
+ │             kubernetes     eb09a3c  Merge pull request #135395 from 
+pohly/apimachinery-wait-for-cache-sync (merge)
+ ● 2026-02-10  kubernetes     99d4b4d  Merge pull request #135256 from 
+natasha41575/pod-gen-field (merge)
+ │             kubernetes     870e292  Merge pull request #136716 from 
+yonizxz/concurrent-node-syncs-split (merge)
+ │             kubernetes     c9534cb  Merge pull request #134981 from 
+haircommander/drop-cpu-load (merge)
+ │             kubernetes     3e15c6f  Merge pull request #136911 from 
+pohly/dra-e2e-data-race (merge)
+ │             kubernetes     1bb2e12  Merge pull request #136734 from 
+sunya-ch/sunya-ch/fix-gather-shared-id (merge)
+ │             minikube       f750803  Build(deps): Bump the golang-org group 
+with 6 updates (#22647)
+ │             kubernetes     65f09e6  Merge pull request #136826 from 
+alvaroaleman/bumpv0.32 (merge)
+ │             kubernetes     e7f26c6  Merge pull request #136339 from 
+ffromani/deprecate-customcpucfsquota-fg-not-feature (merge)
+ │             kubernetes     f425715  CHANGELOG: Update directory for v1.32.12 
+release
+ │             ingress-nginx  efcd54f  Controller: Enable SSL Passthrough when 
+requested on before HTTP-only hosts. (#14555)
+ ● 2026-02-09  ingress-nginx  72d99b3  CI: Update Helm to v4.1.1. (#14552)
+ │             ingress-nginx  a2341e5  Bump github/codeql-action from 4.32.0 to 
+4.32.2 in the actions group (#14544)
+ │             ingress-nginx  ded3b60  Annotations: Use dedicated regular 
+expression for `proxy-cookie-domain`. (#14536)
 
-Total: 8 commits across 2 repositories
+Total: 15 commits across 3 repositories
 ```
+
 
 Filter to a specific contributor:
 
@@ -401,25 +419,1147 @@ $ uv run giteagle log kubernetes/kubernetes kubernetes/minikube --author k8s-ci-
 ```
 
 ```
-Fetched 19 commits from kubernetes/kubernetes
-Fetched 0 commits from kubernetes/minikube
- ● 2026-02-08  kubernetes  918b5ac  Merge pull request #136840 from atombrella/feature/fmt_sprintf_unneeded (merge)
- ● 2026-02-07  kubernetes  669b1de  Merge pull request #136767 from Sahil-4555/atomic-types-test (merge)
- │             kubernetes  d863fbe  Merge pull request #135335 from carlory/cleanup (merge)
- ● 2026-02-06  kubernetes  a4437af  Merge pull request #136621 from ermias19/fix-validatingadmissionpolicy-nil-panic (merge)
- │             kubernetes  17810c6  Merge pull request #136743 from ansilh/master (merge)
- │             kubernetes  2023f44  Merge pull request #136291 from atombrella/feature/modernize_rangeint_test_integration_utils (merge)
- │             kubernetes  1c91a55  Merge pull request #136798 from dims/mark-archived-deps-unwanted (merge)
- │             kubernetes  c0e6971  Merge pull request #136710 from bart0sh/PR221-integration-add-implicit-extended-resources (merge)
- │             kubernetes  38c2026  Merge pull request #136315 from liyuerich/commentstartauthorization (merge)
- │             kubernetes  aba3dc7  Merge pull request #133759 from BenTheElder/integrationprocs (merge)
- │             kubernetes  8972957  Merge pull request #135782 from richabanker/fifo-identity-metric (merge)
- │             kubernetes  da9e038  Merge pull request #133845 from rbiamru/clarify-cpucfsquotaperiod (merge)
+Fetched 43 commits from kubernetes/kubernetes
+Fetched 1 commits from kubernetes/minikube
+ ● 2026-02-11  kubernetes  46ac9df  Merge pull request #135675 from 
+richabanker/merged-discovery (merge)
+ │             kubernetes  eb09a3c  Merge pull request #135395 from 
+pohly/apimachinery-wait-for-cache-sync (merge)
+ ● 2026-02-10  kubernetes  99d4b4d  Merge pull request #135256 from 
+natasha41575/pod-gen-field (merge)
+ │             kubernetes  870e292  Merge pull request #136716 from 
+yonizxz/concurrent-node-syncs-split (merge)
+ │             kubernetes  c9534cb  Merge pull request #134981 from 
+haircommander/drop-cpu-load (merge)
+ │             kubernetes  3e15c6f  Merge pull request #136911 from 
+pohly/dra-e2e-data-race (merge)
+ │             kubernetes  1bb2e12  Merge pull request #136734 from 
+sunya-ch/sunya-ch/fix-gather-shared-id (merge)
+ │             kubernetes  65f09e6  Merge pull request #136826 from 
+alvaroaleman/bumpv0.32 (merge)
+ │             kubernetes  e7f26c6  Merge pull request #136339 from 
+ffromani/deprecate-customcpucfsquota-fg-not-feature (merge)
+ │             kubernetes  7f890ab  Merge pull request #136802 from 
+pohly/fix-data-race-refs-populaterefs (merge)
+ │             kubernetes  2a9b8ba  Merge pull request #136787 from 
+ahmedtd/bump-ctb (merge)
+ │             kubernetes  01b283a  Merge pull request #136907 from 
+aojea/ipaddress_flake (merge)
+ │             kubernetes  59cdded  Merge pull request #136901 from 
+Phaow/vac-fix (merge)
+ │             kubernetes  4670994  Merge pull request #136898 from 
+carlory/kubeadm-ContainerRuntimeVersion-1-37 (merge)
+ │             kubernetes  76b4a90  Merge pull request #136326 from 
+bart0sh/PR218-migrate-kubelet_node_status-to-contextual-logging (merge)
+ │             kubernetes  65b1000  Merge pull request #135749 from 
+novahe/fix-defer-latency (merge)
+ │             kubernetes  44dc4cb  Merge pull request #136888 from 
+neolit123/revert-136130-kubeadm_use_newclientset (merge)
+ │             kubernetes  b6f27f1  Merge pull request #136856 from 
+pohly/dra-integration-timeouts (merge)
+ │             kubernetes  0bb7533  Merge pull request #135464 from 
+MikeSpreitzer/better-concurrency-test-margin (merge)
+ │             kubernetes  1955210  Merge pull request #134044 from 
+mcallzbl/master (merge)
+ │             kubernetes  7b0310a  Merge pull request #136820 from 
+dims/update-otel-deps (merge)
+ │             kubernetes  f693c45  Merge pull request #136775 from 
+atombrella/feature/activate_modernize_slicessort (merge)
+ ● 2026-02-09  kubernetes  fc74562  Merge pull request #136808 from 
+nmn3m/kubelet-contextual-logging (merge)
+ │             kubernetes  09e1c9f  Merge pull request #136455 from 
+pohly/client-go-simpleclient-undeprecation (merge)
+ │             kubernetes  139e78d  Merge pull request #136337 from 
+pohly/dra-e2e-hostpath-image-selection (merge)
+ │             kubernetes  e73221c  Merge pull request #136488 from 
+thockin/fix_bad_arg_name_in_dv (merge)
+ │             kubernetes  a39c820  Merge pull request #136423 from 
+neolit123/1.36-remove-flex-volume-support-from-kubeadm (merge)
+ │             kubernetes  97a2334  Merge pull request #136778 from 
+Jefftree/etcd-metrics-typo (merge)
+ ● 2026-02-08  kubernetes  918b5ac  Merge pull request #136840 from 
+atombrella/feature/fmt_sprintf_unneeded (merge)
 
-Total: 12 commits across 1 repositories
+Total: 29 commits across 1 repositories
+```
+
+
+## 7. Daily Standup Report
+
+Generate a standup-ready summary of recent activity across repositories. The `standup` command groups activities by repo and categorizes them as commits, PRs opened/merged/closed, and issues. It auto-detects the authenticated user when a GitHub token is set.
+
+```bash
+$ uv run giteagle standup kubernetes/kubernetes kubernetes/ingress-nginx --days 3
+```
+
+```
+Fetched 200 activities from kubernetes/kubernetes
+Fetched 34 activities from kubernetes/ingress-nginx
+No activity for igormilovanovic since 2026-02-08
+```
+
+
+## 8. Cross-Repo PR Dashboard
+
+Show all open pull requests across repos with review status, CI status, age, and labels. PRs older than `--stale` days are highlighted as stale.
+
+```bash
+$ uv run giteagle prs kubernetes/kubernetes kubernetes/ingress-nginx --stale 7
+```
+
+```
+Fetched 100 open PRs from kubernetes/kubernetes
+Fetched 44 open PRs from kubernetes/ingress-nginx
+                            Open Pull Requests (144)                            
+╭───────────────┬───┬───────────────────────┬──────┬──────────────┬─────────┬──╮
+│ Repo          │ … │ Author                │ Age  │ Reviews      │ CI      │  │
+├───────────────┼───┼───────────────────────┼──────┼──────────────┼─────────┼──┤
+│ kubernetes    │ … │ shawnhanx             │ 254w │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ shawnhanx             │ 234w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ shawnhanx             │ 228w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ shawnhanx             │ 228w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ shawnhanx             │ 226w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ tomaspinho            │ 203w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ aslafy-z              │ 202w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ chrisshino            │ 195w │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ + │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ alowde                │ 179w │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ kirs                  │ 171w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ hassenius             │ 157w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ HirazawaUi            │ 148w │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ ghostloda             │ 142w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ skitt                 │ 140w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ Spazzy757             │ 139w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ chotiwat              │ 123w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ machine424            │ 120w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ travisghansen         │ 118w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ 2 │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ skitt                 │ 117w │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ skitt                 │ 116w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ nefelim4ag            │ 115w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ DaGenix               │ 114w │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ omertuc               │ 112w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ toredash              │ 106w │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ barrykp               │ 105w │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ bmv126                │ 103w │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ PascalBourdier        │ 103w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ a │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ zvlb                  │ 101w │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ msvticket             │ 96w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ adrianmoisey          │ 94w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ defaulterrr           │ 93w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ towca                 │ 91w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ a │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ nmreadelf             │ 90w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ SOF3                  │ 87w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ g1franc               │ 85w  │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ gjkim42               │ 85w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ huutomerkki           │ 83w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ antomy-gc             │ 83w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ LionelJouin           │ 82w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ HirazawaUi            │ 82w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ linxiulei             │ 82w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ croemmich             │ 81w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ Ritikaa96             │ 79w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ BenTheElder           │ 79w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ 2339478391            │ 77w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ maxl99                │ 76w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ tlwr                  │ 75w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ hshiina               │ 74w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ hshiina               │ 74w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ vrutkovs              │ 73w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ chengjoey             │ 73w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ dsyer                 │ 72w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ JanSchep              │ 72w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ chengjoey             │ 71w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ huochexizhan          │ 71w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ linxiulei             │ 70w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ mneverov              │ 67w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ ajaychoudhary-hotstar │ 67w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ knrc                  │ 66w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ knrc                  │ 66w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ rexagod               │ 66w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ vrutkovs              │ 65w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ tkashem               │ 65w  │ approved (2) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ ffromani              │ 65w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ gavinkflam            │ 64w  │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ VannTen               │ 64w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ acumino               │ 63w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ motoki317             │ 63w  │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ bouaouda-achraf       │ 63w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ elizabeth-dev         │ 62w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ Tal-or                │ 61w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ badouralix            │ 61w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ pohly                 │ 61w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ + │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ elizabeth-dev         │ 61w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ elizabeth-dev         │ 61w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ GFriedrich            │ 61w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ pohly                 │ 61w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ tkashem               │ 61w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ a │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ qvalentin             │ 60w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ chessman              │ 60w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ sjlawton              │ 59w  │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ xyz-li                │ 59w  │ approved (3) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ pohly                 │ 59w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ + │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ pohly                 │ 59w  │ changes (1)  │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ pohly                 │ 59w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ HirazawaUi            │ 59w  │ pending      │ pending │  │
+│               │ : │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ SuperQ                │ 58w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ pando85               │ 57w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ jacekn                │ 57w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ esotsal               │ 55w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ carlory               │ 54w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ adriancuadrado        │ 54w  │ approved (2) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ vaibhav2107           │ 54w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ jm-franc              │ 54w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ zylxjtu               │ 53w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ AwesomePatrol         │ 52w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ rohansingh            │ 52w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ mochizuki875          │ 51w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ novahe                │ 51w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ a │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ lentzi90              │ 51w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ bart0sh               │ 51w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ yue9944882            │ 51w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ oliverguenther        │ 50w  │ changes (1)  │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ laozc                 │ 50w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ RichardoC             │ 50w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ davidxia              │ 50w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ atiratree             │ 50w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ emmanuel              │ 49w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ vrutkovs              │ 49w  │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ ania-borowiec         │ 49w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ cbandy                │ 48w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ HirazawaUi            │ 47w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ iPraveenParihar       │ 46w  │ approved (2) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ HirazawaUi            │ 46w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ aiburegit             │ 45w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ sgaist                │ 45w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ alexintech            │ 44w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ yude                  │ 44w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ ntnn                  │ 43w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ fasaxc                │ 43w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ HirazawaUi            │ 43w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ HirazawaUi            │ 43w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ mbergo                │ 42w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ xigang                │ 42w  │ approved (2) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ leonardoramosantos    │ 41w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ pravk03               │ 41w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ carlory               │ 40w  │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ rexagod               │ 40w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ jaehanbyun            │ 40w  │ approved (2) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ carlory               │ 39w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ ArangoGutierrez       │ 39w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ Chunxia202410         │ 38w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ dacohen               │ 38w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ yangjunmyfm192085     │ 38w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ shadowofs             │ 38w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ alimaazamat           │ 37w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ aryasoni98            │ 37w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ Chunxia202410         │ 37w  │ approved (1) │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ sreeram-venkitesh     │ 37w  │ pending      │ fail    │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ condaatje             │ 36w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ DerekTBrown           │ 36w  │ changes (1)  │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ kubernetes    │ … │ utam0k                │ 36w  │ approved (1) │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ jinjingroad           │ 33w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│ ingress-nginx │ … │ Vexali0n              │ 30w  │ pending      │ pending │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+│               │ … │                       │      │              │         │  │
+╰───────────────┴───┴───────────────────────┴──────┴──────────────┴─────────┴──╯
+```
+
+
+## 9. DORA-Style PR Metrics
+
+Track engineering velocity with DORA-inspired metrics: median time-to-merge (TTM), median time-to-first-review (TTFR), merge rate, and PR throughput per week. Includes trend comparison (up/down/stable) vs the previous period.
+
+```bash
+$ uv run giteagle stats kubernetes/kubernetes kubernetes/ingress-nginx --days 30
+```
+
+```
+Warning: Failed to fetch kubernetes/kubernetes: HTTP 500
+Fetched 198 closed PRs from kubernetes/ingress-nginx
+                           PR Metrics (last 30 days)                           
+╭───────────────┬────────┬────────────┬─────────────┬────────────┬────────────╮
+│ Repo          │ Merged │ Median TTM │ Median TTFR │ Merge Rate │ PRs/week   │
+├───────────────┼────────┼────────────┼─────────────┼────────────┼────────────┤
+│ ingress-nginx │    169 │ 1h 5m      │ 11m         │        93% │ 39.4  ^ up │
+╰───────────────┴────────┴────────────┴─────────────┴────────────┴────────────╯
 ```
 
 ---
 
-*Demo completed at 2026-02-08 23:00:43 UTC.*
+*Demo completed at 2026-02-11 01:19:11 UTC.*
 *Run with giteagle, version 0.1.0.*
