@@ -15,6 +15,7 @@ from rich.table import Table
 
 from giteagle import __version__
 from giteagle.cli.log_renderer import assign_repo_colors, get_display_names, render_log
+from giteagle.cli.prs_renderer import build_pr_infos, render_prs
 from giteagle.cli.standup_renderer import build_standup_data, compute_standup_since, render_standup
 from giteagle.config import load_config
 from giteagle.core import ActivityAggregator, ActivityType
@@ -438,6 +439,86 @@ def standup(ctx: click.Context, repos: tuple, days: int, author: str | None) -> 
 
     standup_data = build_standup_data(activities, since)
     render_standup(console, standup_data, author=resolved_author, since=since)
+
+
+@cli.command()
+@click.argument("repos", nargs=-1, required=True)
+@click.option("--author", default=None, help="Filter by PR author")
+@click.option("--stale", default=7, type=int, help="Days after which a PR is considered stale")
+@click.pass_context
+def prs(ctx: click.Context, repos: tuple, author: str | None, stale: int) -> None:
+    """Show open pull requests across repositories.
+
+    REPOS should be in the format owner/name (e.g., octocat/hello-world)
+    """
+    config_obj = ctx.obj["config"]
+    token = config_obj.github.token.get_secret_value() if config_obj.github.token else None
+
+    async def fetch_prs() -> list:
+        client = GitHubClient(token=token)
+        try:
+            all_pr_infos: list = []
+
+            for repo_name in repos:
+                if "/" not in repo_name:
+                    console.print(f"[yellow]Warning:[/yellow] Skipping invalid repo: {repo_name}")
+                    continue
+
+                owner, name = repo_name.split("/", 1)
+                try:
+                    repository = await client.get_repository(owner, name)
+                    raw_prs = await client.get_open_pull_requests(repository)
+                    console.print(f"[dim]Fetched {len(raw_prs)} open PRs from {repo_name}[/dim]")
+
+                    if not raw_prs:
+                        continue
+
+                    # Fetch reviews and statuses concurrently
+                    review_tasks = [
+                        client.get_pr_reviews(repository, pr["number"]) for pr in raw_prs
+                    ]
+                    status_tasks = [
+                        client.get_commit_status(repository, pr.get("head", {}).get("sha", ""))
+                        for pr in raw_prs
+                        if pr.get("head", {}).get("sha")
+                    ]
+
+                    reviews_results = await asyncio.gather(*review_tasks, return_exceptions=True)
+                    status_results = await asyncio.gather(*status_tasks, return_exceptions=True)
+
+                    reviews_map: dict[int, list] = {}
+                    for pr, result in zip(raw_prs, reviews_results):
+                        if isinstance(result, list):
+                            reviews_map[pr["number"]] = result
+                        else:
+                            reviews_map[pr["number"]] = []
+
+                    status_map: dict[str, dict] = {}
+                    prs_with_sha = [pr for pr in raw_prs if pr.get("head", {}).get("sha")]
+                    for pr, status_result in zip(prs_with_sha, status_results):
+                        sha = pr["head"]["sha"]
+                        if isinstance(status_result, dict):
+                            status_map[sha] = status_result
+                        else:
+                            status_map[sha] = {"state": "unknown"}
+
+                    pr_infos = build_pr_infos(raw_prs, reviews_map, status_map, repo_name)
+                    all_pr_infos.extend(pr_infos)
+
+                except Exception as e:
+                    console.print(f"[yellow]Warning:[/yellow] Failed to fetch {repo_name}: {e}")
+
+            return all_pr_infos
+        finally:
+            await client.close()
+
+    try:
+        pr_infos = run_async(fetch_prs())
+    except Exception as e:
+        console.print(f"[red]Error:[/red] {e}")
+        raise SystemExit(1) from None
+
+    render_prs(console, pr_infos, stale_days=stale, author_filter=author)
 
 
 if __name__ == "__main__":
