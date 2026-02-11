@@ -130,6 +130,48 @@ run_demo_command \
     "Visualize weekly activity over the past 30 days across three Kubernetes repositories." \
     "uv run giteagle timeline ${K8S_CORE} ${K8S_MINIKUBE} ${K8S_INGRESS} --days 30 --granularity week"
 
+run_demo_command \
+    "6" \
+    "Unified Git Log Across Repos" \
+    "Browse commits across multiple repositories in a single unified view, like \`tig\` but for multiple repos. Each repo gets a distinct color, commits are grouped by date, and merge commits are marked." \
+    "uv run giteagle log ${K8S_CORE} ${K8S_MINIKUBE} ${K8S_INGRESS} --days 3 --limit 15"
+
+{
+    echo ""
+    echo "Filter to a specific contributor:"
+    echo ""
+    echo '```bash'
+    echo "$ uv run giteagle log ${K8S_CORE} ${K8S_MINIKUBE} --author k8s-ci-robot --days 3"
+    echo '```'
+    echo ""
+} >> "$OUTPUT_FILE"
+
+OUTPUT_LOG=$(NO_COLOR=1 bash -c "uv run giteagle log ${K8S_CORE} ${K8S_MINIKUBE} --author k8s-ci-robot --days 3" 2>&1 | strip_ansi | strip_uv_warnings)
+{
+    echo '```'
+    echo "${OUTPUT_LOG}"
+    echo '```'
+    echo ""
+} >> "$OUTPUT_FILE"
+
+run_demo_command \
+    "7" \
+    "Daily Standup Report" \
+    "Generate a standup-ready summary of recent activity across repositories. The \`standup\` command groups activities by repo and categorizes them as commits, PRs opened/merged/closed, and issues. It auto-detects the authenticated user when a GitHub token is set." \
+    "uv run giteagle standup ${K8S_CORE} ${K8S_INGRESS} --days 3"
+
+run_demo_command \
+    "8" \
+    "Cross-Repo PR Dashboard" \
+    "Show all open pull requests across repos with review status, CI status, age, and labels. PRs older than \`--stale\` days are highlighted as stale." \
+    "uv run giteagle prs ${K8S_CORE} ${K8S_INGRESS} --stale 7"
+
+run_demo_command \
+    "9" \
+    "DORA-Style PR Metrics" \
+    "Track engineering velocity with DORA-inspired metrics: median time-to-merge (TTM), median time-to-first-review (TTFR), merge rate, and PR throughput per week. Includes trend comparison (up/down/stable) vs the previous period." \
+    "uv run giteagle stats ${K8S_CORE} ${K8S_INGRESS} --days 30"
+
 # --- Footer ---
 
 GITEAGLE_VERSION=$(NO_COLOR=1 uv run giteagle --version 2>/dev/null | strip_ansi || echo "unknown")
