@@ -59,7 +59,7 @@ run_demo_command() {
 
     local output
     local exit_code=0
-    output=$(NO_COLOR=1 bash -c "${cmd}" 2>&1) || exit_code=$?
+    output=$(NO_COLOR=1 COLUMNS=160 bash -c "${cmd}" 2>&1) || exit_code=$?
 
     output=$(printf '%s' "$output" | strip_ansi | strip_uv_warnings)
 
@@ -146,7 +146,7 @@ run_demo_command \
     echo ""
 } >> "$OUTPUT_FILE"
 
-OUTPUT_LOG=$(NO_COLOR=1 bash -c "uv run giteagle log ${K8S_CORE} ${K8S_MINIKUBE} --author k8s-ci-robot --days 3" 2>&1 | strip_ansi | strip_uv_warnings)
+OUTPUT_LOG=$(NO_COLOR=1 COLUMNS=160 bash -c "uv run giteagle log ${K8S_CORE} ${K8S_MINIKUBE} --author k8s-ci-robot --days 3" 2>&1 | strip_ansi | strip_uv_warnings)
 {
     echo '```'
     echo "${OUTPUT_LOG}"
@@ -157,20 +157,20 @@ OUTPUT_LOG=$(NO_COLOR=1 bash -c "uv run giteagle log ${K8S_CORE} ${K8S_MINIKUBE}
 run_demo_command \
     "7" \
     "Daily Standup Report" \
-    "Generate a standup-ready summary of recent activity across repositories. The \`standup\` command groups activities by repo and categorizes them as commits, PRs opened/merged/closed, and issues. It auto-detects the authenticated user when a GitHub token is set." \
-    "uv run giteagle standup ${K8S_CORE} ${K8S_INGRESS} --days 3"
+    "Generate a standup-ready summary of recent activity across repositories. The \`standup\` command groups activities by repo and categorizes them as commits, PRs opened/merged/closed, and issues. Use \`--author\` to filter by contributor." \
+    "uv run giteagle standup ${K8S_CORE} ${K8S_INGRESS} --author k8s-ci-robot --days 3"
 
 run_demo_command \
     "8" \
     "Cross-Repo PR Dashboard" \
     "Show all open pull requests across repos with review status, CI status, age, and labels. PRs older than \`--stale\` days are highlighted as stale." \
-    "uv run giteagle prs ${K8S_CORE} ${K8S_INGRESS} --stale 7"
+    "uv run giteagle prs ${K8S_INGRESS} --stale 7"
 
 run_demo_command \
     "9" \
     "DORA-Style PR Metrics" \
     "Track engineering velocity with DORA-inspired metrics: median time-to-merge (TTM), median time-to-first-review (TTFR), merge rate, and PR throughput per week. Includes trend comparison (up/down/stable) vs the previous period." \
-    "uv run giteagle stats ${K8S_CORE} ${K8S_INGRESS} --days 30"
+    "uv run giteagle stats ${K8S_MINIKUBE} ${K8S_INGRESS} --days 30"
 
 # --- Footer ---
 
